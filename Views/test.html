@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/stylesheet.css">
+    <title>TriPPlaner | Browse Itineraries</title>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <div class="d-flex">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand mx-3" href="index">TriPPlaner</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="itineraries.html">Browse Itineraries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="plantrip.html">Plan Trip</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="activities.html">Activities</a>
+                    </li>
+                </ul>
+
+                
+                
+            </div>
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor">Login</button>
+                <button type="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor">Sign up</button>
+            </div>
+        </div>
+    </nav>
+
+
+      <div class="d-flex mt-5" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border bg-white w-100" id="sidebar-wrapper">
+            <h3 class="text-center">Filter</h3>
+
+            <h5 class="mx-3 mt-3 w-100">Budget</h5>
+            
+            <div class="slidecontainer">
+                <input type="range" min="1000" max="5000" value="1000" oninput="this.nextElementSibling.value = this.value">
+                <output>1000</output>
+              </div>
+
+
+            <h5 class="mx-3 mt-5 w-100">Countries</h5>
+            <div class="mx-3 w-100">
+                <input class="d-inline" type="checkbox"> Singapore <br>
+                <input class="d-inline" type="checkbox"> Singapore <br>
+                <input class="d-inline" type="checkbox"> Singapore <br>
+                <input class="d-inline" type="checkbox"> Singapore
+            </div>
+            
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            
+            <!-- Page content-->
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+        
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Trip Name</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <a href="#" class="btn btn-primary stretched-link">See More</a>
+                            </div>
+        
+                            <div class="card-footer">
+                                <h4 class="text-muted">$2500</h4>
+                            </div>
+                        </div>
+                    </div>
+        
+                </div>
+        </div>
+    </div>
+
+    
+</body>
+
+
+
+
+</html>
