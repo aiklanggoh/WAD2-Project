@@ -64,6 +64,10 @@
     
     <hr> <h1 id='login'></h1>
 
+    <table class="table" id="plans">
+        
+    </table>
+
 
 
 
@@ -76,7 +80,6 @@
         // https://firebase.google.com/docs/web/setup#available-libraries
       
         // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyBTz07CsUuC8llduTdGo_e81mWjQcdw8oI",
             authDomain: "wad2-tripplanner.firebaseapp.com",
@@ -89,9 +92,6 @@
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-
-
-        // Import the functions needed to read from realtime database
 
         // connect to the realtime database
         const db = getDatabase(app);
@@ -106,10 +106,6 @@
         });
 
 
-
-
-
-
         //Element Refereneces
         var name = document.getElementById("tripName")
         var days = document.getElementById("noDays")
@@ -120,10 +116,44 @@
             //unique id (or also can use Date.now())
             var itinerary_id = push(child(ref(db), "AllItineraries")).key
 
-            set(ref(db, "AllItineraries/" + itinerary_id), {
+            //main properties of itinerary: trip name, duration, image url
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id), {
                 ItineraryName: name.value,
                 Days: days.value
             })
+
+            //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day1/activity1"), {
+                act_name: "Dinner",
+                time: "6pm - 7pm",
+                address: "prinsep street"
+            })
+
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day1/activity2"), {
+                act_name: "travel to airport",
+                time: "7pm - 8pm",
+                address: "airport"
+            })
+
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day2/activity1"), {
+                act_name: "breakfast",
+                time: "9am - 10am",
+                address: "hotel"
+            })
+
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day2/activity2"), {
+                act_name: "free and easy",
+                time: "10am - 12pm",
+                address: "anywhere"
+            })
+
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day2/activity3"), {
+                act_name: "fun activity",
+                time: "1pm - 5pm",
+                address: "fun place"
+            })
+
+
             .then(() => {
                 alert("Data stored successfully!")
             })
@@ -143,7 +173,7 @@
         
         const provider = new GoogleAuthProvider(); 
         const auth = getAuth(); 
-        var loginUser = false; 
+        var loginUser = false; // Current Logged In User, false if not logged in.
         
         // when authentication status changed 
         onAuthStateChanged(auth, (user) => { 
@@ -155,13 +185,60 @@
                 // ... 
                 loginUser = user; 
                 document.getElementById('login').innerText = `${user.displayName} (${user.email})`; 
+                document.getElementById('plans').innerHTML = `<p>here are your trips</p>`
+
+
+                //GET EACH ITINERARY UNDER CURRENT USER
+                onValue(ref(db, 'AllItineraries/' + uid), (snapshot) => {
+
+                    //console.log(snapshot.val())
+                    var counter = 1
+
+                    for(let key in snapshot.val()){
+                        var itinerary_obj = snapshot.val()[key]
+                        var acts = itinerary_obj.itinerary
+                        
+
+                        console.log(itinerary_obj)
+                        console.log(acts)
+
+                        
+
+
+                        //(CURRENTLY HARDCODED FOR VISUALISATION) <----------------------------------------------
+                        document.getElementById('plans').innerHTML += 
+                        `
+                        <p>(Trip ${counter}) ${key} <br>
+                            Trip Name: ${itinerary_obj.ItineraryName} <br>
+                            Duration: ${itinerary_obj.Days} <br>
+                            Day1 <br>
+                            Activity 1: ${acts.day1.activity1.act_name} ---- ${acts.day1.activity1.time} ---- ${acts.day1.activity1.address} <br>
+                            Activity 2: ${acts.day1.activity2.act_name} ---- ${acts.day1.activity2.time} ---- ${acts.day1.activity2.address} <br>
+                            
+                            Day2 <br>
+                            Activity 1: ${acts.day2.activity1.act_name} ---- ${acts.day2.activity1.time} ---- ${acts.day2.activity1.address} <br>
+                            Activity 2: ${acts.day2.activity2.act_name} ---- ${acts.day2.activity2.time} ---- ${acts.day2.activity2.address} <br>
+                            
+                        </p>
+                        `
+                        
+                        counter += 1;
+                    }
+
+                })
+
+                
             } else { 
                 // User is signed out 
                 // ... 
                 loginUser = false; 
                 document.getElementById('login').innerText = 'Not authenticated'; 
+                document.getElementById('plans').innerHTML = `<p>Please login to view</p>`
             } 
         }); 
+
+
+
 
         // login 
         document.getElementById('btnLogin').addEventListener('click', function () { 
