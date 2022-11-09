@@ -147,6 +147,12 @@
                 address: "anywhere"
             })
 
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day2/activity3"), {
+                act_name: "fun activity",
+                time: "1pm - 5pm",
+                address: "fun place"
+            })
+
 
             .then(() => {
                 alert("Data stored successfully!")
@@ -196,12 +202,7 @@
                         console.log(itinerary_obj)
                         console.log(acts)
 
-                        for(let i in acts){
-                            console.log(i)
-                            for(let k in acts.day1){
-                                console.log(k)
-                            }
-                        }
+                        
 
 
                         //(CURRENTLY HARDCODED FOR VISUALISATION) <----------------------------------------------
@@ -217,6 +218,7 @@
                             Day2 <br>
                             Activity 1: ${acts.day2.activity1.act_name} ---- ${acts.day2.activity1.time} ---- ${acts.day2.activity1.address} <br>
                             Activity 2: ${acts.day2.activity2.act_name} ---- ${acts.day2.activity2.time} ---- ${acts.day2.activity2.address} <br>
+                            
                         </p>
                         `
                         
