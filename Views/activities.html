@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TriPPlaner | Activities</title>
+    <link rel="stylesheet" href="../styles/stylesheet.css">
+    <title>TriPPlaner | Browse Itineraries</title>
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
+
 <body>
 
+    <!--Nav Bar-->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">TriPPlaner</a>
+            <div class="d-flex">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand mx-3" href="index">TriPPlaner</a>
+            </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="itineraries.html">Browse Itineraries</a>
@@ -34,24 +43,282 @@
                         <a class="nav-link" href="plantrip.html">Plan Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="activities.html">Activities</a>
+                        <a class="nav-link" href="activities.html">Activities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mytrips.html">My Trips</a>
                     </li>
                 </ul>
 
-                
-                <div class="d-flex">
-                    <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor">Login</a>
-                    <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor">Register</a>
+
+
+            </div>
+            <div class="d-flex align-items-center">
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <span class="px-3" id="loginUser"></span>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div id="app">
+        <div class="d-flex mt-5" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border bg-white" id="sidebar-wrapper">
+                <h3 class="text-center">Filter</h3>
+
+                <h5 class="mx-3 mt-3 w-100">Budget</h5>
+
+                <div class="slidecontainer">
+                    <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
+                    <output>{{max_price}}</output>
+                </div>
+
+
+                <h5 class="mx-3 mt-5 w-100">Which city whould you like to visit?</h5>
+                <div class="mx-3 w-150 mb-3 me-3">
+                    <input type="text" name="" id="" v-model="country">
+                    <button v-on:click="init()">Search!</button>
+                </div>
+
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+            </div>
+            <!-- Page content-->
+            <div class="container-fluid">
+                <div class="row">
+                    <template v-for="(item, index) in activities">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='FREE!!!'">
+                            <div class="card h-100">
+                                <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.src='../img/Image_not_available.png'">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item.name}}</h5>
+                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
+                                </div>
+                                <div class="card-footer">
+                                    <h4 class="text-muted" v-if="item.price == 'FREE!!!'">{{ item.price}}</h4>
+                                    <h4 class="text-muted" v-else>{{'$' + item.price}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
-      </nav>
 
 
 
-    
+
+
 </body>
 
+
+
+
+
+
+
+</div>
+
+<script>
+    // <div id='app'></div>
+    const app = Vue.createApp({
+        data() {
+            return {
+                lat: '',
+                log: '',
+                country: '',
+                activities: [],
+                max_price: 0,
+                min_price: 999999,
+                set_price: 999999,
+            };
+        }, // data
+        // computed: { 
+        //     derivedProperty() {
+        //         return false;
+        //     }  
+        // }, // computed
+        // created() { 
+        // },
+        // mounted() { 
+        // },
+        methods: {
+            init() {
+                this.max_price = 0,
+                    this.min_price = 999999,
+                    console.log(this.country)
+                urlAuth = 'https://test.api.amadeus.com/v1/security/oauth2/token'
+                axios.post(urlAuth, {
+                    grant_type: 'client_credentials',
+                    client_id: 'anWsVbPQ2XRKpVaqhPpAAo6kD3gWg9W4',
+                    client_secret: 'mVpJAulivwbKwyjE'
+                },
+                    {
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                    }
+                )
+                    .then(response => {
+                        console.log(response.data);
+                        amadeusAccessToken = response.data.access_token
+                        this.location()
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    })
+            },
+            flightTour() {
+                amadeusTour = 'https://test.api.amadeus.com/v1/shopping/activities'
+                axios.get(amadeusTour, {
+                    headers: {
+                        'Authorization': `Bearer ${amadeusAccessToken}`
+                    },
+                    params: {
+                        latitude: this.lat,
+                        longitude: this.log,
+                        radius: 500
+                    }
+                })
+                    .then(response => {
+                        this.activities = []
+                        console.log(response.data);
+                        dataArr = response.data.data
+                        for (data of dataArr) {
+                            user = {}
+                            user.name = data.name
+                            user.des = data.shortDescription
+                            user.pic = data.pictures[0]
+                            if (data.price.amount == '0.0') {
+                                user.price = 'FREE!!!'
+                            }
+                            else {
+                                user.price = data.price.amount
+                            }
+                            this.activities.push(user)
+
+                            if (data.price.amount > this.max_price) {
+                                this.max_price = parseInt(data.price.amount) + 1
+                            }
+
+                            if (this.min_price == 999999) {
+                                this.min_price = data.price.amount
+                            }
+                            else if (data.price.amount < this.min_price) {
+                                this.min_price = data.price.amount
+                            }
+                        }
+                        this.set_price = this.max_price
+                        console.log(this.activities)
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    });
+            },
+            location() {
+                googleMapKey = 'AIzaSyDJvQ07_z4s7gXHdfECKoynPXsYPvVePAE'
+                url = 'https://maps.googleapis.com/maps/api/geocode/json?'
+                axios.get(url, {
+                    params: {
+                        address: this.country,
+                        key: googleMapKey
+                    }
+                })
+                    .then(response => {
+                        //console.log(response.data);
+                        this.lat = response.data.results[0].geometry.location.lat
+                        this.log = response.data.results[0].geometry.location.lng
+                        //this.name = response.data.results[0].formatted_address
+                        this.flightTour()
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    });
+            },
+        } // methods
+    });
+    const vm = app.mount('#app'); 
+</script>
+
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set, update, get, push, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBTz07CsUuC8llduTdGo_e81mWjQcdw8oI",
+        authDomain: "wad2-tripplanner.firebaseapp.com",
+        projectId: "wad2-tripplanner",
+        storageBucket: "wad2-tripplanner.appspot.com",
+        messagingSenderId: "1078917579599",
+        appId: "1:1078917579599:web:d59344d7b81a0cb1e97b3a",
+        databaseURL: "https://wad2-tripplanner-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+  
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+
+    // connect to the realtime database
+    const db = getDatabase(firebaseApp);
+
+
+
+
+    /* AUTHENTICATION CODE: START */ 
+    import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js"; 
+    
+    const provider = new GoogleAuthProvider(); 
+    const auth = getAuth(); 
+    var loginUser = false; // Current Logged In User, false if not logged in.
+    
+    // when authentication status changed 
+    onAuthStateChanged(auth, (user) => { 
+        if (user) { 
+            // User is signed in, see docs for a list of available properties 
+            // https://firebase.google.com/docs/reference/js/firebase.User
+
+            const uid = user.uid; 
+            // ... 
+            loginUser = user; 
+            document.getElementById('loginPage').style.display = "none"
+            document.getElementById('registerPage').style.display = "none"
+            document.getElementById('loginUser').innerText = `Current User: ${user.email}`; 
+
+
+            
+        } else { 
+            // User is signed out 
+            // ... 
+            loginUser = false; 
+            document.getElementById('logoutBtn').style.display = "none"
+        } 
+    }); 
+
+
+        
+    // logout 
+    document.getElementById('logoutBtn') .addEventListener('click', function () { 
+        signOut(auth).then(() => { 
+            // Sign-out successful.
+            loginUser = false; 
+            location.href = "itineraries.html"
+        
+        }).catch((error) => { 
+            // An error happened. 
+            console.log(error);
+        }); 
+    }); /* AUTHENTICATION CODE: END */
+
+
+
+
+</script>
 
 
 

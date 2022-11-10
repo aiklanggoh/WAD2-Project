@@ -40,9 +40,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="activities.html">Activities</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mytrips.html">My Trips</a>
-                    </li>
                 </ul>
 
                 
@@ -78,12 +75,10 @@
 
                 str = 
         
-                `<div id="${count}" class="row">
+                `<div class="row">
 
-                    <div class="bg-dark text-light">
-                        <b style="font-size : 20px">Day <input type='number' min=1 style="width : 40px"></b> 
-
-                        <button class="btn btn-danger float-end" onclick="del(${count})"">Delete</button>
+                    <div class="bg-dark text-light text-center">
+                        <b style="font-size : 20px">Day <span>${count}</span></b>
                     </div>
 
                     <table class='table table-bordered table-striped text-center'>
@@ -390,12 +385,6 @@
                 </div>`
                 
                 divEl.innerHTML += str
-            }
-
-
-            function del(count) {
-                var rootEl = document.getElementById(count)
-                rootEl.remove();
             }
 
             
