@@ -126,7 +126,7 @@
             })
 
             //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
-            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day1/activity1"), {
+            set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day1/activity1"), { // `${{}}`
                 act_name: "Dinner",
                 time: "6pm - 7pm",
                 address: "prinsep street"
