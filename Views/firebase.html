@@ -64,8 +64,10 @@
     
     <hr> <h1 id='login'></h1>
 
-    <span id="testresults"></span>
-    <table class="table" id="plans">
+    <div id="plans"></div>
+    <div id="testresults"></div>
+    
+    
         
     </table>
 
@@ -187,7 +189,7 @@
                 loginUser = user; 
                 document.getElementById('login').innerText = `${user.displayName} (${user.email})`; 
                 document.getElementById('plans').innerHTML = `<p>here are your trips</p>`
-
+                var testing = document.getElementById("testresults")
 
                 //GET EACH ITINERARY UNDER CURRENT USER
                 onValue(ref(db, 'AllItineraries/' + uid), (snapshot) => {
@@ -199,22 +201,66 @@
                         var itinerary_obj = snapshot.val()[itinerary_key]
                         var itinerary = itinerary_obj.itinerary
                         
-
+                        console.log(itinerary_key)
                         console.log(itinerary_obj)
                         console.log(itinerary)
 
+                        // NEW ACCORDION HERE
+                        
                         
                         for(let day in itinerary){
                             
 
                             let day_activities = itinerary[day]
-                            console.log(day_activities) // this logs every activity in the current day
+                            console.log(day)
+                            //console.log(day_activities)   // this logs every activity in the current day
+                            
+
+                            //NEW DAY TABLE HERE
+                            let table = document.createElement("table")
+                            testing.appendChild(table)
+
+                            let trk = document.createElement("tr")
+                            table.appendChild(trk)
+
+                            let th = document.createElement("th")
+                            trk.appendChild(th)
+                            th.appendChild(document.createTextNode(day))
+
+                            let trh = document.createElement("tr")
+                            table.appendChild(trh)
+                            trh.appendChild(document.createTextNode("Time"))
+                            trh.appendChild(document.createTextNode("Activity"))
+                            trh.appendChild(document.createTextNode("Address"))
+
+                            
+
 
                             for(let activity in day_activities){
-                                console.log(day_activities[activity]) //this logs every activity in the list of activities in the current day
+                                //console.log(day_activities[activity])     //this logs every activity in the list of activities in the current day
                                 console.log(day_activities[activity].time)
                                 console.log(day_activities[activity].act_name)
                                 console.log(day_activities[activity].address)
+                                console.log("------------------------------------")
+
+                                //NEW ROW FOR ACTIVITY HERE
+                                let tr = document.createElement('tr');
+                                table.appendChild(tr);
+
+                                let td1 = document.createElement('td');
+                                tr.appendChild(td1);
+
+                                let td2 = document.createElement("td");
+                                tr.appendChild(td2)
+
+                                let td3 = document.createElement("td");
+                                tr.appendChild(td3)
+
+                                td1.appendChild(document.createTextNode(day_activities[activity].time))
+                                td2.appendChild(document.createTextNode(day_activities[activity].act_name))
+                                td3.appendChild(document.createTextNode(day_activities[activity].address))
+
+
                             }
                             
 
