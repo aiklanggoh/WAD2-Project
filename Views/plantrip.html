@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,15 +11,18 @@
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
     <script src="https://unpkg.com/vue@next"></script>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="index.html">TriPPlaner</a>
@@ -38,100 +42,107 @@
                     </li>
                 </ul>
 
-                
+
                 <div class="d-flex">
-                    <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor">Login</a>
-                    <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor">Register</a>
+                    <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2"
+                        aria-controls="#picker-editor">Login</a>
+                    <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3"
+                        aria-controls="#picker-editor">Register</a>
                 </div>
             </div>
         </div>
-      </nav>
+    </nav>
 
-      <div id="app" class="container mt-5 ms-1">
-        <div class="row">
-            <div class="col-3">
-                budget: <input type="text" name="" id="">
-            </div>
-            <div class="col-3">
-                destination: <input type="text" name="" id="">
-            </div>
-            <div class="col-3">
-                description: <input type="text" name="" id="">
-            </div>
-        </div>
-
-        <div id="row">
-            <div class="col">
-                <div class="row" v-for="(item, index) of trip">
-                    <div class="justify-content-end d-flex">
-                        <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
+    <div id="app" class="container-fluid mt-5 ms-1">
+        <div class="row justify-content-between">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-3">
+                        budget: <input type="text" name="" id="">
                     </div>
-                    <div class="bg-dark text-light">
-                        <b style="font-size : 20px"> {{'Day ' + (index + 1)}}</b>
-                        <button class="btn btn-danger float-end" v-on:click="del(index)">Delete</button>
+                    <div class="col-3">
+                        destination: <input type="text" name="" id="">
                     </div>
-                    <table class='table table-bordered table-striped text-center'>
-                        <tr>
-                            <th>
-                                Time
-                            </th>
-                            <th>
-                                Activity
-                            </th>
-                            <th>
-                                Address
-                            </th>
-                        </tr>
-                        <template v-for="(item2, index2) of item">
-                            <tr>
-                                <td>
-                                    {{item2[0]}}
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" v-model="item2[1]">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control"  v-model="item2[2]">
-                                </td>
-                                <td>
-                                    <button v-on:click="delTime(index, index2)">Delete</button>
-                                </td>
-                            </tr>
-                        </template>
-                        <tr>
-                            <td><input type="time" name="" :id="index + 's'"><input type="time" name="" :id="index + 'e'"><button v-on:click="addTime(index)">Add Time</button></td>
-                        </tr>
-                    </table>
-                
+                    <div class="col-3">
+                        description: <input type="text" name="" id="">
+                    </div>
                 </div>
-                <div class="justify-content-end d-flex">
-                    <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
-                </div>
-            </div>
-            <div class="col">
-                <div class="row " v-for="(item, index) in amazonItems">
-                    <div class="card" style="width: 18rem;">
-                        <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title"> {{ item.title }} </h5>
-                          <p class="card-text"> {{ '$' + item.price }} </p>
-                          <a :href="item.link" class="btn btn-primary">Buy at Amazon</a>
+                <div id="row">
+                    <div class="col">
+                        <div class="row" v-for="(item, index) of trip">
+                            <div class="justify-content-end d-flex">
+                                <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
+                            </div>
+                            <div class="bg-dark text-light">
+                                <b style="font-size : 20px"> {{'Day ' + (index + 1)}}</b>
+                                <button class="btn btn-danger float-end" v-on:click="del(index)">Delete</button>
+                            </div>
+                            <table class='table table-bordered table-striped text-center'>
+                                <tr>
+                                    <th>
+                                        Time
+                                    </th>
+                                    <th>
+                                        Activity
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
+                                </tr>
+                                <template v-for="(item2, index2) of item">
+                                    <tr>
+                                        <td>
+                                            {{item2[0]}}
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" v-model="item2[1]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" v-model="item2[2]">
+                                        </td>
+                                        <td>
+                                            <button v-on:click="delTime(index, index2)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td><input type="time" name="" :id="index + 's'"><input type="time" name=""
+                                            :id="index + 'e'"><button v-on:click="addTime(index)">Add Time</button></td>
+                                </tr>
+                            </table>
                         </div>
-                      </div>
+                        <div class="justify-content-end d-flex">
+                            <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-6 mb-3" v-for="(item, index) in amazonItems">
+                        <div class="card" style="width: 18rem;">
+                            <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ item.title }} </h5>
+                                <p class="card-text"> {{ '$' + item.price }} </p>
+                                <a :href="item.link" class="btn btn-primary">Buy at Amazon</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-        <script>
+    <script>
 
-            const app = Vue.createApp({ 
-            data() { 
-                return { 
+        const app = Vue.createApp({
+            data() {
+                return {
                     winter: ['winter jacket', 'winter heat packs', 'Universal Travel Adapter', 'Neck Pillow'],
-                    summer: ['sunglass', 'sunscreen lotion', 'Universal Travel Adapter', 'Neck Pillow'], 
+                    summer: ['sunglass', 'sunscreen lotion', 'Universal Travel Adapter', 'Neck Pillow'],
                     normal: ['Universal Travel Adapter', 'Neck Pillow'],
-                    date: {month: '4', day:'15'},
+                    date: { month: '4', day: '15' },
                     lat: '',
                     lon: '',
                     amazonItems: [],
@@ -145,58 +156,67 @@
             //         return false;
             //     }  
             // }, // computed
-             created() {
-                //this.weather()
-             },
+            created() {
+                this.weather()
+            },
             // mounted() { 
             // },
             methods: {
-                rainForest() {  
-                    const rainForestApi = 'https://api.rainforestapi.com/request'
-                    if (this.temp < 18) {
-                        search_item = this.winter 
+                rainForest() {
+                    // const rainForestApi = 'https://api.rainforestapi.com/request'
+                    // if (this.temp < 18) {
+                    //     search_item = this.winter 
+                    // }
+                    // else if (this.temp > 30) {
+                    //     search_item = this.summer
+                    // }
+                    // else {
+                    //     search_item = this.normal
+                    // }
+                    // for (item of search_item) {
+                    //     axios.get(rainForestApi, {
+                    //         params: {
+                    //             api_key: "440E156E46C4488682079EDE9AA3CA55",
+                    //             search_term: item,
+                    //             amazon_domain: 'amazon.com',
+                    //             type: "search"
+                    //         }
+                    //     })
+                    //         .then(response => {
+                    //             console.log(response.data);
+                    //             returnResult = {}
+                    //             returnResult.image = response.data.search_results[0].image
+                    //             returnResult.price = response.data.search_results[0].price.value
+                    //             returnResult.title = response.data.search_results[0].title
+                    //             returnResult.link = response.data.search_results[0].link
+                    //             this.amazonItems.push(returnResult)
+                    //             console.log(this.amazonItems)
+                    //         })
+                    //         .catch( error => {
+                    //             console.log(error.message);
+                    //         });
+                    // }
+
+                    for (let i = 0; i < 5; i++) {
+                        returnResult = {}
+                        returnResult.image = 'image'
+                        returnResult.price = '13.50'
+                        returnResult.title = 'this ai is not working bloody hell'
+                        returnResult.link = 'www.google.com'
+                        this.amazonItems.push(returnResult)
                     }
-                    else if (this.temp > 30) {
-                        search_item = this.summer
-                    }
-                    else {
-                        search_item = this.normal
-                    }
-                    for (item of search_item) {
-                        axios.get(rainForestApi, {
-                            params: {
-                                api_key: "440E156E46C4488682079EDE9AA3CA55",
-                                search_term: item,
-                                amazon_domain: 'amazon.com',
-                                type: "search"
-                            }
-                        })
-                            .then(response => {
-                                console.log(response.data);
-                                returnResult = {}
-                                returnResult.image = response.data.search_results[0].image
-                                returnResult.price = response.data.search_results[0].price.value
-                                returnResult.title = response.data.search_results[0].title
-                                returnResult.link = response.data.search_results[0].link
-                                this.amazonItems.push(returnResult)
-                                console.log(this.amazonItems)
-                            })
-                            .catch( error => {
-                                console.log(error.message);
-                            });
-                    }
-                    
+
                 },
                 weather() {
                     weatherApiKey = '6KW9AM26XV6KVJGBM4Q2UK845'
                     weatherApiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?'
                     axios.get(weatherApiUrl, {
                         params: {
-                            locations:  this.location,
+                            locations: this.location,
                             aggregateHours: 24,
                             unitGroup: 'metric',
-                            startDateTime: '2019-' + this.date.month + '-' + this.date.day +'T00:00:00',
-                            endDateTime: '2019-' + this.date.month + '-' + this.date.day +'T00:00:00',
+                            startDateTime: '2019-' + this.date.month + '-' + this.date.day + 'T00:00:00',
+                            endDateTime: '2019-' + this.date.month + '-' + this.date.day + 'T00:00:00',
                             contentType: 'json',
                             key: weatherApiKey
                         }
@@ -206,64 +226,66 @@
                             let country = Object.values(response.data.locations)[0]
                             this.temp = country.values[0].temp
                             console.log(this.temp)
-                            //this.rainForest()
+                            this.rainForest()
                         })
-                        .catch( error => {
+                        .catch(error => {
                             console.log(error.message);
-                           // this.rainForest()
+                            this.rainForest()
                         });
                 },
                 addDay(index) {
-                        new_arr = []
+                    new_arr = []
 
-                        if(index == 'new') {
-                            this.trip.push(new_arr)
+                    if (index == 'new') {
+                        this.trip.push(new_arr)
+                    }
+                    else {
+                        this.trip.splice(index, 0, new_arr)
+                    }
+                },
+                del(day) {
+                    this.trip.splice(day, 1)
+                },
+                addTime(day) {
+                    start_time = document.getElementById(day + 's').value
+                    end_time = document.getElementById(day + 'e').value
+                    if (parseInt(start_time.split(":").join('')) < parseInt(end_time.split(":").join(''))) {
+                        if (this.trip[day].length == 0) {
+                            this.trip[day].push([start_time + ' - ' + end_time, '', ''])
                         }
                         else {
-                            this.trip.splice(index, 0, new_arr)
-                        }
-                    },
-                    del(day) {
-                        this.trip.splice(day, 1)
-                    },
-                    addTime(day) {
-                        start_time = document.getElementById(day + 's').value
-                        end_time = document.getElementById(day + 'e').value
-                        if (parseInt(start_time.split(":").join('')) < parseInt(end_time.split(":").join(''))) {
-                            if (this.trip[day].length == 0) {
-                            this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                            this_day = this.trip[day]
+                            previous_time_slot = this_day[this_day.length - 1]
+                            previous_end_time = previous_time_slot[0].split(' - ')[1]
+                            previous_end_time_int = parseInt(previous_end_time.split(':').join(''))
+                            if (previous_end_time_int > parseInt(start_time.split(":").join(''))) {
+                                alert('your start time is earlier than previous end time')
                             }
                             else {
-                                this_day = this.trip[day]
-                                previous_time_slot = this_day[this_day.length - 1]
-                                previous_end_time = previous_time_slot[0].split(' - ')[1]
-                                previous_end_time_int = parseInt(previous_end_time.split(':').join(''))
-                                if (previous_end_time_int > parseInt(start_time.split(":").join(''))) {
-                                    alert('your start time is earlier than previous end time')
-                                }
-                                else {
-                                    this.trip[day].push([start_time + ' - ' + end_time, '', ''])
-                                }
+                                this.trip[day].push([start_time + ' - ' + end_time, '', ''])
                             }
                         }
-                        else {
-                            alert('your start time is later then the end time or the same as end time')
-                        }
-                        
-                    },
-                    delTime(day, time) { 
-                        this_day = this.trip[day]
-                        this_day.splice(time, 1)
                     }
+                    else {
+                        alert('your start time is later then the end time or the same as end time')
+                    }
+
+                },
+                delTime(day, time) {
+                    this_day = this.trip[day]
+                    this_day.splice(time, 1)
+                }
             } // methods
         });
         const vm = app.mount('#app');
-        </script>
- 
+    </script>
+
 </body>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
 
 
 </html>
