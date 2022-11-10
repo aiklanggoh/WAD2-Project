@@ -54,9 +54,10 @@
 
             </div>
             <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor">Login</button>
-                <button type="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor">Sign
-                    up</button>
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <span class="px-3" id="loginUser"></span>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
@@ -93,7 +94,7 @@
                     <template v-for="(item, index) in activities">
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='FREE!!!'">
                             <div class="card h-100">
-                                <img :src="item.pic" class="card-img-top" alt="not found" onerror="this.src='../img/Image_not_available.png'">
+                                <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
                                     <a href="#" class="btn btn-primary stretched-link">See More</a>
@@ -241,5 +242,84 @@
     });
     const vm = app.mount('#app'); 
 </script>
+
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set, update, get, push, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBTz07CsUuC8llduTdGo_e81mWjQcdw8oI",
+        authDomain: "wad2-tripplanner.firebaseapp.com",
+        projectId: "wad2-tripplanner",
+        storageBucket: "wad2-tripplanner.appspot.com",
+        messagingSenderId: "1078917579599",
+        appId: "1:1078917579599:web:d59344d7b81a0cb1e97b3a",
+        databaseURL: "https://wad2-tripplanner-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+  
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+
+    // connect to the realtime database
+    const db = getDatabase(firebaseApp);
+
+
+
+
+    /* AUTHENTICATION CODE: START */ 
+    import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js"; 
+    
+    const provider = new GoogleAuthProvider(); 
+    const auth = getAuth(); 
+    var loginUser = false; // Current Logged In User, false if not logged in.
+    
+    // when authentication status changed 
+    onAuthStateChanged(auth, (user) => { 
+        if (user) { 
+            // User is signed in, see docs for a list of available properties 
+            // https://firebase.google.com/docs/reference/js/firebase.User
+
+            const uid = user.uid; 
+            // ... 
+            loginUser = user; 
+            document.getElementById('loginPage').style.display = "none"
+            document.getElementById('registerPage').style.display = "none"
+            document.getElementById('loginUser').innerText = `Current User: ${user.email}`; 
+
+
+            
+        } else { 
+            // User is signed out 
+            // ... 
+            loginUser = false; 
+            document.getElementById('logoutBtn').style.display = "none"
+        } 
+    }); 
+
+
+        
+    // logout 
+    document.getElementById('logoutBtn') .addEventListener('click', function () { 
+        signOut(auth).then(() => { 
+            // Sign-out successful.
+            loginUser = false; 
+            location.href = "itineraries.html"
+        
+        }).catch((error) => { 
+            // An error happened. 
+            console.log(error);
+        }); 
+    }); /* AUTHENTICATION CODE: END */
+
+
+
+
+</script>
+
+
 
 </html>
