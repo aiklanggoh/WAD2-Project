@@ -48,6 +48,17 @@
       </nav>
 
       <div id="app" class="container mt-5 ms-1">
+        <div class="row">
+            <div class="col-3">
+                budget: <input type="text" name="" id="">
+            </div>
+            <div class="col-3">
+                destination: <input type="text" name="" id="">
+            </div>
+            <div class="col-3">
+                description: <input type="text" name="" id="">
+            </div>
+        </div>
 
         <div id="row">
             <div class="col">
@@ -71,16 +82,24 @@
                                 Address
                             </th>
                         </tr>
-                        <tr v-for="(item2, index2) in item">
-                            <td>
-                                {{index2}}
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" v-model="item2[0]">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control"  v-model="item2[1]">
-                            </td>
+                        <template v-for="(item2, index2) of item">
+                            <tr>
+                                <td>
+                                    {{item2[0]}}
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" v-model="item2[1]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control"  v-model="item2[2]">
+                                </td>
+                                <td>
+                                    <button v-on:click="delTime(index, index2)">Delete</button>
+                                </td>
+                            </tr>
+                        </template>
+                        <tr>
+                            <td><input type="time" name="" :id="index + 's'"><input type="time" name="" :id="index + 'e'"><button v-on:click="addTime(index)">Add Time</button></td>
                         </tr>
                     </table>
                 
@@ -116,8 +135,9 @@
                     lat: '',
                     lon: '',
                     amazonItems: [],
-                    location: 'moscow. russia',
+                    location: 'russia',
                     trip: [],
+                    check: 0
                 };
             }, // data
             // computed: { 
@@ -176,7 +196,7 @@
                             aggregateHours: 24,
                             unitGroup: 'metric',
                             startDateTime: '2019-' + this.date.month + '-' + this.date.day +'T00:00:00',
-                            endDateTime: '2019-12-15T00:00:00',
+                            endDateTime: '2019-' + this.date.month + '-' + this.date.day +'T00:00:00',
                             contentType: 'json',
                             key: weatherApiKey
                         }
@@ -194,32 +214,7 @@
                         });
                 },
                 addDay(index) {
-                        new_arr = {}
-
-                        new_arr['0000 - 0100'] = ['', '']
-                        new_arr['0100 - 0200'] = ['', '']
-                        new_arr['0200 - 0300'] = ['', '']
-                        new_arr['0300 - 0400'] = ['', '']
-                        new_arr['0400 - 0500'] = ['', '']
-                        new_arr['0500 - 0600'] = ['', '']
-                        new_arr['0600 - 0700'] = ['', '']
-                        new_arr['0700 - 0800'] = ['', '']
-                        new_arr['0800 - 0900'] = ['', '']
-                        new_arr['0900 - 1000'] = ['', '']
-                        new_arr['1000 - 1100'] = ['', '']
-                        new_arr['1100 - 1200'] = ['', '']
-                        new_arr['1200 - 1300'] = ['', '']
-                        new_arr['1300 - 1400'] = ['', '']
-                        new_arr['1400 - 1500'] = ['', '']
-                        new_arr['1500 - 1600'] = ['', '']
-                        new_arr['1600 - 1700'] = ['', '']
-                        new_arr['1700 - 1800'] = ['', '']
-                        new_arr['1800 - 1900'] = ['', '']
-                        new_arr['1900 - 2000'] = ['', '']
-                        new_arr['2000 - 2100'] = ['', '']
-                        new_arr['2100 - 2200'] = ['', '']
-                        new_arr['2200 - 2300'] = ['', '']
-                        new_arr['2300 - 0000'] = ['', '']
+                        new_arr = []
 
                         if(index == 'new') {
                             this.trip.push(new_arr)
@@ -227,10 +222,38 @@
                         else {
                             this.trip.splice(index, 0, new_arr)
                         }
-                        console.log(this.trip)
                     },
                     del(day) {
                         this.trip.splice(day, 1)
+                    },
+                    addTime(day) {
+                        start_time = document.getElementById(day + 's').value
+                        end_time = document.getElementById(day + 'e').value
+                        if (parseInt(start_time.split(":").join('')) < parseInt(end_time.split(":").join(''))) {
+                            if (this.trip[day].length == 0) {
+                            this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                            }
+                            else {
+                                this_day = this.trip[day]
+                                previous_time_slot = this_day[this_day.length - 1]
+                                previous_end_time = previous_time_slot[0].split(' - ')[1]
+                                previous_end_time_int = parseInt(previous_end_time.split(':').join(''))
+                                if (previous_end_time_int > parseInt(start_time.split(":").join(''))) {
+                                    alert('your start time is earlier than previous end time')
+                                }
+                                else {
+                                    this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                                }
+                            }
+                        }
+                        else {
+                            alert('your start time is later then the end time or the same as end time')
+                        }
+                        
+                    },
+                    delTime(day, time) { 
+                        this_day = this.trip[day]
+                        this_day.splice(time, 1)
                     }
             } // methods
         });
