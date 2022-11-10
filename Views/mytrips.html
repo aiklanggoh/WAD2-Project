@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/stylesheet.css">
-    <title>TriPPlaner | Browse Itineraries</title>
+    <title>TriPPlaner | My Trips</title>
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -54,33 +54,29 @@
 
             </div>
             <div class="d-flex align-items-center">
-                <!--TO REMOVE LOGIN BUTTON-->
-                <button type="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor"
-                    id="btnLogin">Google Login</button>
-                <button type="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor"
-                    id="btnLogout">Logout</button>
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <span class="px-3" id="loginUser"></span>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
 
 
-    
-    <div class="container-fluid mt-3" style="background-color: rgb(231, 231, 231);">
+
+    <div class="container-fluid">
         
-        <h3 style="text-align: center;" class="p-3 text-primary">Planned Trips</h3>
 
         <div class="accordion accordion-flush" id="accordionFlushExample">
 
-            <!-- TO MAKE THE ATTRIBUTES DYNAMIC FOR EXAMPLE - ID, bs-target, labelledby -->
+            <!-- TO MAKE THE ATTRIBUTES DYNAMIC FOR EXAMPLE - ID, bs-target-->
             <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="background-color: rgb(202, 202, 202)">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush1" aria-expanded="false">
                         Accordion Item #1
                     </button>
                 </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample">
+                <div id="flush1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                         <table class="table">
                             <tr>
@@ -138,16 +134,13 @@
             </div>
 
 
-            <!-- Option 2 -->
             <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" style="background-color: rgb(202, 202, 202)">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush2" aria-expanded="false">
                         Accordion Item #2
                     </button>
                 </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                    data-bs-parent="#accordionFlushExample">
+                <div id="flush2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                         <table class="table">
                             <tr>
@@ -260,6 +253,10 @@
             document.getElementById('login').innerText = `${user.displayName} (${user.email})`;
             document.getElementById('plans').innerHTML = ``
 
+            document.getElementById('loginPage').style.display = "none"
+            document.getElementById('registerPage').style.display = "none"
+            document.getElementById('loginUser').innerText = `Current User: ${user.email}`; 
+
 
             //GET EACH ITINERARY UNDER CURRENT USER
             onValue(ref(db, 'AllItineraries/' + uid), (snapshot) => {
@@ -305,7 +302,6 @@
                                             <td>${acts.day1.activity2.address}</td>
                                         </tr>
                                     </table>
-
                                     <table class="table">
                                         <tr><th colspan="3" class="bg-info">Day 2</th></tr>
                                         <tr>
@@ -332,7 +328,6 @@
                                 </div>
                             </div>
                         </div>
-
                     `
 
                     counter += 1;
@@ -347,40 +342,19 @@
             loginUser = false;
             document.getElementById('login').innerText = 'Not authenticated';
             document.getElementById('plans').innerHTML = `<p>Please login to view</p>`
+            //document.getElementById("accordionFlushExample").style.display = "none"
+            document.getElementById('logoutBtn').style.display = "none"
         }
     });
 
 
-    // login 
-    document.getElementById('btnLogin').addEventListener('click', function () {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API. 
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info. 
-                const user = result.user;
-                // ... 
-                loginUser = user;
-
-            }).catch((error) => {
-                // Handle Errors here. 
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used. 
-                const email = error.email;
-                // The AuthCredential type that was used. 
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ... 
-                console.log(error);
-            });
-    });
 
     // logout 
-    document.getElementById('btnLogout').addEventListener('click', function () {
+    document.getElementById('logoutBtn').addEventListener('click', function () {
         signOut(auth).then(() => {
             // Sign-out successful.
             loginUser = false;
+            location.href = "index.html"
 
         }).catch((error) => {
             // An error happened. 
