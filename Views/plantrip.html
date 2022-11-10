@@ -12,15 +12,11 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-    <style>
-        
-
-    </style>
-
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-light" style="position: sticky;">
+    <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,52 +36,40 @@
                     <li class="nav-item">
                         <a class="nav-link" href="activities.html">Activities</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mytrips.html">My Trips</a>
-                    </li>
                 </ul>
 
                 
                 <div class="d-flex">
-                    <a href="login.html" class="btn btn-primary" role="button">Login</a>
-                    <a href="register.html" class="btn btn-primary" role="button">Register</a>
+                    <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor">Login</a>
+                    <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor">Register</a>
                 </div>
             </div>
-
-            
         </div>
-    </nav>
+      </nav>
 
-
-
-    <div class="container-fluid mt-5">
-
-        <div class="justify-content-end d-flex">
-            <button class="btn btn-primary mb-3" onclick="addDay()">Add Day</button>
+      <div id="app" class="container mt-5 ms-1">
+        <div class="row">
+            <div class="col-3">
+                budget: <input type="text" name="" id="">
+            </div>
+            <div class="col-3">
+                destination: <input type="text" name="" id="">
+            </div>
+            <div class="col-3">
+                description: <input type="text" name="" id="">
+            </div>
         </div>
 
-        <div id="res">
-        </div>
-
-        <script>  // to add table
-
-            var count = 0;
-
-            function addDay() {
-
-                var divEl = document.getElementById("res");
-                count += 1
-
-                str = 
-        
-                `<div id="${count}" class="row">
-
-                    <div class="bg-dark text-light">
-                        <b style="font-size : 20px">Day <input type='number' min=1 style="width : 40px"></b> 
-
-                        <button class="btn btn-danger float-end" onclick="del(${count})"">Delete</button>
+        <div id="row">
+            <div class="col">
+                <div class="row" v-for="(item, index) of trip">
+                    <div class="justify-content-end d-flex">
+                        <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
                     </div>
-
+                    <div class="bg-dark text-light">
+                        <b style="font-size : 20px"> {{'Day ' + (index + 1)}}</b>
+                        <button class="btn btn-danger float-end" v-on:click="del(index)">Delete</button>
+                    </div>
                     <table class='table table-bordered table-striped text-center'>
                         <tr>
                             <th>
@@ -98,318 +82,188 @@
                                 Address
                             </th>
                         </tr>
-
+                        <template v-for="(item2, index2) of item">
+                            <tr>
+                                <td>
+                                    {{item2[0]}}
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" v-model="item2[1]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control"  v-model="item2[2]">
+                                </td>
+                                <td>
+                                    <button v-on:click="delTime(index, index2)">Delete</button>
+                                </td>
+                            </tr>
+                        </template>
                         <tr>
-                            <td>
-                                0000 - 0100
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
+                            <td><input type="time" name="" :id="index + 's'"><input type="time" name="" :id="index + 'e'"><button v-on:click="addTime(index)">Add Time</button></td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                0100 - 0200
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0200 - 0300
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0300 - 0400
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0400 - 0500
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0500 - 0600
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0600 - 0700
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0700 - 0800
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0800 - 0900
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0900 - 1000
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1000 - 1100
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1100 - 1200
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1200 - 1300
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1300 - 1400
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1400 - 1500
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1500 - 1600
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1600 - 1700
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1700 - 1800
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1800 - 1900
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1900 - 2000
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2000 - 2100
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2100 - 2200
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2200 - 2300
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2300 - 0000
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                </div>`
+                    </table>
                 
-                divEl.innerHTML += str
-            }
-
-
-            function del(count) {
-                var rootEl = document.getElementById(count)
-                rootEl.remove();
-            }
-
-            
-        </script>
-        
-        
-
+                </div>
+                <div class="justify-content-end d-flex">
+                    <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row " v-for="(item, index) in amazonItems">
+                    <div class="card" style="width: 18rem;">
+                        <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title"> {{ item.title }} </h5>
+                          <p class="card-text"> {{ '$' + item.price }} </p>
+                          <a :href="item.link" class="btn btn-primary">Buy at Amazon</a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+        <script>
 
-    
+            const app = Vue.createApp({ 
+            data() { 
+                return { 
+                    winter: ['winter jacket', 'winter heat packs', 'Universal Travel Adapter', 'Neck Pillow'],
+                    summer: ['sunglass', 'sunscreen lotion', 'Universal Travel Adapter', 'Neck Pillow'], 
+                    normal: ['Universal Travel Adapter', 'Neck Pillow'],
+                    date: {month: '4', day:'15'},
+                    lat: '',
+                    lon: '',
+                    amazonItems: [],
+                    location: 'russia',
+                    trip: [],
+                    check: 0
+                };
+            }, // data
+            // computed: { 
+            //     derivedProperty() {
+            //         return false;
+            //     }  
+            // }, // computed
+             created() {
+                //this.weather()
+             },
+            // mounted() { 
+            // },
+            methods: {
+                rainForest() {  
+                    const rainForestApi = 'https://api.rainforestapi.com/request'
+                    if (this.temp < 18) {
+                        search_item = this.winter 
+                    }
+                    else if (this.temp > 30) {
+                        search_item = this.summer
+                    }
+                    else {
+                        search_item = this.normal
+                    }
+                    for (item of search_item) {
+                        axios.get(rainForestApi, {
+                            params: {
+                                api_key: "440E156E46C4488682079EDE9AA3CA55",
+                                search_term: item,
+                                amazon_domain: 'amazon.com',
+                                type: "search"
+                            }
+                        })
+                            .then(response => {
+                                console.log(response.data);
+                                returnResult = {}
+                                returnResult.image = response.data.search_results[0].image
+                                returnResult.price = response.data.search_results[0].price.value
+                                returnResult.title = response.data.search_results[0].title
+                                returnResult.link = response.data.search_results[0].link
+                                this.amazonItems.push(returnResult)
+                                console.log(this.amazonItems)
+                            })
+                            .catch( error => {
+                                console.log(error.message);
+                            });
+                    }
+                    
+                },
+                weather() {
+                    weatherApiKey = '6KW9AM26XV6KVJGBM4Q2UK845'
+                    weatherApiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?'
+                    axios.get(weatherApiUrl, {
+                        params: {
+                            locations:  this.location,
+                            aggregateHours: 24,
+                            unitGroup: 'metric',
+                            startDateTime: '2019-' + this.date.month + '-' + this.date.day +'T00:00:00',
+                            endDateTime: '2019-' + this.date.month + '-' + this.date.day +'T00:00:00',
+                            contentType: 'json',
+                            key: weatherApiKey
+                        }
+                    })
+                        .then(response => {
+                            console.log(response.data);
+                            let country = Object.values(response.data.locations)[0]
+                            this.temp = country.values[0].temp
+                            console.log(this.temp)
+                            //this.rainForest()
+                        })
+                        .catch( error => {
+                            console.log(error.message);
+                           // this.rainForest()
+                        });
+                },
+                addDay(index) {
+                        new_arr = []
+
+                        if(index == 'new') {
+                            this.trip.push(new_arr)
+                        }
+                        else {
+                            this.trip.splice(index, 0, new_arr)
+                        }
+                    },
+                    del(day) {
+                        this.trip.splice(day, 1)
+                    },
+                    addTime(day) {
+                        start_time = document.getElementById(day + 's').value
+                        end_time = document.getElementById(day + 'e').value
+                        if (parseInt(start_time.split(":").join('')) < parseInt(end_time.split(":").join(''))) {
+                            if (this.trip[day].length == 0) {
+                            this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                            }
+                            else {
+                                this_day = this.trip[day]
+                                previous_time_slot = this_day[this_day.length - 1]
+                                previous_end_time = previous_time_slot[0].split(' - ')[1]
+                                previous_end_time_int = parseInt(previous_end_time.split(':').join(''))
+                                if (previous_end_time_int > parseInt(start_time.split(":").join(''))) {
+                                    alert('your start time is earlier than previous end time')
+                                }
+                                else {
+                                    this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                                }
+                            }
+                        }
+                        else {
+                            alert('your start time is later then the end time or the same as end time')
+                        }
+                        
+                    },
+                    delTime(day, time) { 
+                        this_day = this.trip[day]
+                        this_day.splice(time, 1)
+                    }
+            } // methods
+        });
+        const vm = app.mount('#app');
+        </script>
+ 
 </body>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 
 </html>
