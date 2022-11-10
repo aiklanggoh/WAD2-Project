@@ -43,14 +43,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="activities.html">Activities</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mytrips.html">My Trips</a>
+                    </li>
                 </ul>
 
                 
                 
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor">Login</a>
-                <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor">Register</a>
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <span class="px-3" id="loginUser"></span>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
@@ -179,6 +184,83 @@
             </div>
         </div>
     </div>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+        import { getDatabase, ref, onValue, set, update, get, push, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTz07CsUuC8llduTdGo_e81mWjQcdw8oI",
+            authDomain: "wad2-tripplanner.firebaseapp.com",
+            projectId: "wad2-tripplanner",
+            storageBucket: "wad2-tripplanner.appspot.com",
+            messagingSenderId: "1078917579599",
+            appId: "1:1078917579599:web:d59344d7b81a0cb1e97b3a",
+            databaseURL: "https://wad2-tripplanner-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+    
+        // connect to the realtime database
+        const db = getDatabase(app);
+    
+    
+    
+    
+        /* AUTHENTICATION CODE: START */ 
+        import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js"; 
+        
+        const provider = new GoogleAuthProvider(); 
+        const auth = getAuth(); 
+        var loginUser = false; // Current Logged In User, false if not logged in.
+        
+        // when authentication status changed 
+        onAuthStateChanged(auth, (user) => { 
+            if (user) { 
+                // User is signed in, see docs for a list of available properties 
+                // https://firebase.google.com/docs/reference/js/firebase.User
+    
+                const uid = user.uid; 
+                // ... 
+                loginUser = user; 
+                document.getElementById('loginPage').style.display = "none"
+                document.getElementById('registerPage').style.display = "none"
+                document.getElementById('loginUser').innerText = `Current User: ${user.email}`; 
+
+    
+                
+            } else { 
+                // User is signed out 
+                // ... 
+                loginUser = false; 
+                document.getElementById('logoutBtn').style.display = "none"
+            } 
+        }); 
+    
+    
+            
+        // logout 
+        document.getElementById('logoutBtn') .addEventListener('click', function () { 
+            signOut(auth).then(() => { 
+                // Sign-out successful.
+                loginUser = false; 
+                location.href = "index.html"
+            
+            }).catch((error) => { 
+                // An error happened. 
+                console.log(error);
+            }); 
+        }); /* AUTHENTICATION CODE: END */
+    
+    
+    
+    
+    </script>
+    
 
 
     
