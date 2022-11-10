@@ -64,6 +64,7 @@
     
     <hr> <h1 id='login'></h1>
 
+    <span id="testresults"></span>
     <table class="table" id="plans">
         
     </table>
@@ -194,21 +195,37 @@
                     //console.log(snapshot.val())
                     var counter = 1
 
-                    for(let key in snapshot.val()){
-                        var itinerary_obj = snapshot.val()[key]
-                        var acts = itinerary_obj.itinerary
+                    for(let itinerary_key in snapshot.val()){
+                        var itinerary_obj = snapshot.val()[itinerary_key]
+                        var itinerary = itinerary_obj.itinerary
                         
 
                         console.log(itinerary_obj)
-                        console.log(acts)
+                        console.log(itinerary)
 
                         
+                        for(let day in itinerary){
+                            
+
+                            let day_activities = itinerary[day]
+                            console.log(day_activities) // this logs every activity in the current day
+
+                            for(let activity in day_activities){
+                                console.log(day_activities[activity]) //this logs every activity in the list of activities in the current day
+                                console.log(day_activities[activity].time)
+                                console.log(day_activities[activity].act_name)
+                                console.log(day_activities[activity].address)
+                            }
+                            
+
+                        }
 
 
                         //(CURRENTLY HARDCODED FOR VISUALISATION) <----------------------------------------------
+                        /*
                         document.getElementById('plans').innerHTML += 
                         `
-                        <p>(Trip ${counter}) ${key} <br>
+                        <p>(Trip ${counter}) ${itinerary_key} <br>
                             Trip Name: ${itinerary_obj.ItineraryName} <br>
                             Duration: ${itinerary_obj.Days} <br>
                             Day1 <br>
@@ -221,7 +238,7 @@
                             
                         </p>
                         `
-                        
+                        */
                         counter += 1;
                     }
 
