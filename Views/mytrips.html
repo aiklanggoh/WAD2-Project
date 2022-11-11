@@ -177,8 +177,7 @@
                         accord.appendChild(tripContainer)
 
                         let dayRow = document.createElement("div")
-                        dayRow.setAttribute("class", "row")
-                        dayRow.setAttribute("class", "bg-info")
+                        dayRow.setAttribute("class", "row bg-info dayStyle")
                         tripContainer.appendChild(dayRow)
 
                         let dayCol = document.createElement("div")
@@ -189,7 +188,7 @@
 
 
                         let headerRow = document.createElement("div")
-                        headerRow.setAttribute("class", "row")
+                        headerRow.setAttribute("class", "row headStyle bg-light text-center")
                         tripContainer.appendChild(headerRow)
 
                         let headerItem1 = document.createElement("div")
@@ -222,7 +221,7 @@
                             //NEW ROW FOR ACTIVITY HERE
 
                             let activityRow = document.createElement("div")
-                            activityRow.setAttribute("class", "row")
+                            activityRow.setAttribute("class", "row activityStyle bg-light text-center")
                             tripContainer.appendChild(activityRow)
 
 
@@ -242,7 +241,7 @@
                             activityRow.appendChild(activityItem2)
                             activityRow.appendChild(activityItem3)
 
-
+                            
                         }
 
                     }
