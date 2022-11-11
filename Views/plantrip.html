@@ -67,16 +67,16 @@
     <div id="app" class="container mt-5 ms-1">
         <div class="row">
             <div class="col-3">
-                Trip Name: <input id="tripName" type="text" name="" id="">
+                Trip Name: <input id="tripName" type="text" name="" >
             </div>
             <div class="col-3">
-                budget: <input id="budget" type="text" name="" id="">
+                budget: <input id="budget" type="text" name="" >
             </div>
             <div class="col-3">
-                destination: <input id="destination" type="text" name="" id="">
+                destination: <input id="destination" type="text" name="">
             </div>
             <div class="col-3">
-                description: <input id="description" type="text" name="" id="">
+                description: <input id="description" type="text" name="">
             </div>
         </div>
 
@@ -313,28 +313,24 @@
     const db = getDatabase(firebaseApp);
 
     //Element Refereneces
-    var name = document.getElementById("tripName").value
-    var days = String(trip.length)
-    var budget = document.getElementById("budget").value
-    var destination = document.getElementById("destination").value
-    var description = document.getElementById("description").value
+    var name = document.getElementById("tripName")
+    var budget = document.getElementById("budget")
+    var destination = document.getElementById("destination")
+    var description = document.getElementById("description")
     var addBtn = document.getElementById("insertBtn")
     
 
     function insertData() {
-        console.log(name)
-        console.log(trip.length)
-        console.log(budget)
         //unique id (or also can use Date.now())
         var itinerary_id = push(child(ref(db), "Itineraries")).key
 
         //main properties of itinerary: trip name, duration, image url
         set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id), {
-            ItineraryName: name,
-            Days: days,
-            Budget: budget,
-            Destination: destination,
-            Description: description
+            ItineraryName: name.value,
+            Days: trip.length,
+            Budget: budget.value,
+            Destination: destination.value,
+            Description: description.value
         })
 
         
@@ -356,11 +352,11 @@
 
 
         set(ref(db, "/ItinerariesCatalog/" + itinerary_id), {
-            ItineraryName: name,
-            Days: days,
-            Budget: budget,
-            Destination: destination,
-            Description: description
+            ItineraryName: name.value,
+            Days: trip.length,
+            Budget: budget.value,
+            Destination: destination.value,
+            Description: description.value
         })
 
         day_count = 1
@@ -368,7 +364,7 @@
            time_count = 1
             for (let time of day) {
                 //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
-                set(ref(db, "/ItinerariesCatalog/" + itinerary_id + "/itinerary/day1/activity1"), { // `${{}}`
+                set(ref(db, "/ItinerariesCatalog/" + itinerary_id + "/itinerary/day" + day_count +"/activity" + time_count), { // `${{}}`
                     act_name: time[1],
                     time: time[0],
                     address: time[2]
@@ -380,11 +376,11 @@
 
         
         set(ref(db, "/dump/" + itinerary_id), {
-            ItineraryName: name,
-            Days: days,
-            Budget: budget,
-            Destination: destination,
-            Description: description
+            ItineraryName: name.value,
+            Days: trip.length,
+            Budget: budget.value,
+            Destination: destination.value,
+            Description: description.value
         })
         
 
