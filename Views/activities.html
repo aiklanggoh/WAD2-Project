@@ -97,7 +97,7 @@
                                 <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
+                                    <a :href="item.link" class="btn btn-primary stretched-link">See More</a>
                                 </div>
                                 <div class="card-footer">
                                     <h4 class="text-muted" v-if="item.price == 'FREE!!!'">{{ item.price}}</h4>
@@ -192,6 +192,7 @@
                             user.name = data.name
                             user.des = data.shortDescription
                             user.pic = data.pictures[0]
+                            user.link = data.bookingLink
                             if (data.price.amount == '0.0') {
                                 user.price = 'FREE!!!'
                             }

@@ -72,7 +72,7 @@
                  })
                      .then(response => {
                          this.nearAirport2()
-                         //console.log(response.data);
+                         console.log(response.data);
                          this.lat = response.data.results[0].geometry.location.lat
                          this.log = response.data.results[0].geometry.location.lng
                          this.nearestAirport()
@@ -98,7 +98,7 @@
                         }
                     })
                         .then(response => {
-                             //console.log(response.data)
+                             console.log(response.data)
                              airports = response.data.geonames
                              for (let airport in airports) {
                                 this.airportArr.push(airports[airport].name)
@@ -174,8 +174,8 @@
                         params: {
                             originLocationCode:  'SYD',
                             destinationLocationCode: 'BKK',
-                            departureDate: '2022-11-01',
-                            returnDate: '2022-11-11',
+                            departureDate: '2022-12-01',
+                            returnDate: '2022-12-11',
                             adults: 1,
                             children: 0,
                             infants: 0,
