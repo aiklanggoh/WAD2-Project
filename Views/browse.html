@@ -82,99 +82,40 @@
     </div>
     
     <div id='app'>
-        <div class="d-flex mt-5" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border bg-white" id="sidebar-wrapper">
-                <h3 class="text-center">Filter</h3>
-
-                <h5 class="mx-3 mt-3 w-100">Budget</h5>
-
-                <div class="slidecontainer">
-                    <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
-                    <output>{{max_price}}</output>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="d-flex mt-5 justify-content-end" id="wrapper">
+                    <div class="col-8"></div>
+                    <div class="col-2" id="sidebar-wrapper">
+                        <!-- <h3 class="text-center">Filter</h3> -->
+                        <h5 class="mx-3 mb-2 w-100">Budget</h5>
+        
+                        <div class="mx-3 mb-3 slidecontainer">
+                            <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
+                            <output>{{max_price}}</output>
+                        </div>
+                    </div>
+        
+                    <div class="col-2">
+                        <h5 class="mx-3 w-100">Destination</h5>
+                        <div class="mx-3 mb-3">
+                            <select class="form-select" aria-label="Default select example" v-model="selected_country">
+                                <option v-for="(item, index) in country_arr">{{item}}</option>
+                            </select>
+                        </div>
+        
+                    </div> 
                 </div>
-
-
-                <h5 class="mx-3 mt-5 w-100">Destination</h5>
-                <div class="mx-3">
-                    <select class="form-select" aria-label="Default select example" v-model="selected_country">
-                        <option v-for="(item, index) in country_arr">{{item}}</option>
-                    </select>
-                </div>
-
+                         
             </div>
+        </div>
+        
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
             </div>
                 <!-- Page content-->
 
                 <div class="container-fluid">
-                    <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/japan.PNG" class="card-img-top h-100" alt="...">
-            
-                                <div class="card-body">
-                                    <h5 class="card-title">Japan</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="../Views/japan.html" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div>
-            
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/newyork.PNG" class="card-img-top h-100" alt="...">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Trip Name</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/singapore.jpg" class="card-img-top h-100" alt="...">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Trip Name</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/santorini.jpg" class="card-img-top h-100" alt="...">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Trip Name</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div> -->
-
-                    <!-- <p v-for="(item, i) in key">{{ key[i].Destination }}</p> -->
                     <div class="row">
                         <itinerary-card v-on:showKey='' :selected_country="selected_country" :price="set_price"></itinerary-card>
                     </div>
@@ -358,7 +299,7 @@
                                 <p class="card-text">{{item.Description}}</p>
                                 <form action="itinerary.html" method="get">
                                     <input type="hidden" name="key" v-bind:value='key'>
-                                    <input type="submit" value="See More" />
+                                    <button class="btn btn-bg text-white"input type="submit" value="See More">See More</button>
                                 </form>
                             </div>
                             <div class="card-footer">
