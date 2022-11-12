@@ -263,12 +263,21 @@
                     function deleteTrip(){
                         remove(ref(db, "AllItineraries/" + uid + "/" + document.getElementById(`deleteTrip${i}`).value))
                             .then(() => {
+                                
+                            })
+                            .catch((error) => {
+                                
+                            })
+
+
+                        remove(ref(db, "ItinerariesCatalog/" + document.getElementById(`deleteTrip${i}`).value))
+                            .then(() => {
                                 alert("Trip Deleted Successfully!")
                                 location.reload()
                             })
                             .catch((error) => {
                                 alert("Unsuccessful, Error: " + error)
-                            })
+                            })    
                     }
 
                     let deleteBtn = document.getElementById(`deleteTrip${i}`)
