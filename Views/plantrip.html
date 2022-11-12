@@ -64,6 +64,8 @@
         </div>
     </nav>
 
+    <h1 class="text-center mt-5 mb-5">Plan Itinerary</h1>
+
     <div id="app" class="container-fluid mt-5 ms-1">
         <div class="row justify-content-center">
             <div class="col-lg-3">
@@ -74,7 +76,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon2">Budget</span>
+                    <span class="input-group-text" id="basic-addon2">Budget ($)</span>
                     <input type="number" id="budget" class="form-control" aria-describedby="basic-addon2">
                 </div>
             </div>
@@ -89,7 +91,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon4">Destination</span>
+                    <span class="input-group-text" id="basic-addon4">Destination (City)</span>
                     <input type="text" id="destination" class="form-control" aria-describedby="basic-addon4">
                 </div>
             </div>
@@ -110,7 +112,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-1">
-                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Lets Go!</button>
+                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Check Flights</button>
             </div>
         </div>
 
@@ -825,7 +827,7 @@
             loginUser = false;
             document.getElementById('logoutBtn').style.display = "none"
             //location.href = "index.html"
-            document.getElementById('app').innerHTML = "<h1>Login Required to Plan a Trip!</h1>"
+            document.getElementById('app').innerHTML = "<h2 class='text-center'>Please Login to Plan a Trip!</h2>"
         }
     });
 
