@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/stylesheet.css">
     <title>TriPPlaner | Browse Itineraries</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.png">
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -23,155 +24,108 @@
 <body>
 
     <!--Nav Bar-->
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-bg text-white">
         <div class="container-fluid">
             <div class="d-flex">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3" href="index">TriPPlaner</a>
+                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                    <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="browse.html">Browse Itineraries</a>
+                        <a class="nav-link active text-white" href="browse.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="plantrip.html">Plan Trip</a>
+                        <a class="nav-link text-white" href="plantrip.html">Plan Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="activities.html">Activities</a>
+                        <a class="nav-link text-white" href="activities.html">Activities</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="mytrips.html">My Trips</a>
+                        <a class="nav-link text-white" href="mytrips.html">My Trips</a>
                     </li>
                 </ul>
 
-
-
+                
+                
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
-                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
                 <span class="px-3" id="loginUser"></span>
-                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
+                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
 
-
-    <div class="d-flex mt-5" id="wrapper">
-        <!-- Sidebar-->
-        <div class="border bg-white" id="sidebar-wrapper">
-            <h3 class="text-center">Filter</h3>
-
-            <h5 class="mx-3 mt-3 w-100">Budget</h5>
-
-            <div class="slidecontainer">
-                <input type="range" min="1000" max="5000" value="1000"
-                    oninput="this.nextElementSibling.value = this.value">
-                <output>1000</output>
-            </div>
-
-
-            <h5 class="mx-3 mt-5 w-100">Countries</h5>
-            <div class="mx-3 w-100">
-                <input class="d-inline" type="checkbox"> Singapore <br>
-                <input class="d-inline" type="checkbox"> Singapore <br>
-                <input class="d-inline" type="checkbox"> Singapore <br>
-                <input class="d-inline" type="checkbox"> Singapore
-            </div>
-
-        </div>
-        <!-- Page content wrapper-->
-        <div id="page-content-wrapper">
-
-            <!-- Page content-->
-            <div id='app'>
-                <div class="container-fluid">
-                    <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/japan.PNG" class="card-img-top h-100" alt="...">
-            
-                                <div class="card-body">
-                                    <h5 class="card-title">Japan</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="../Views/japan.html" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div>
-            
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/newyork.PNG" class="card-img-top h-100" alt="...">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Trip Name</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/singapore.jpg" class="card-img-top h-100" alt="...">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Trip Name</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="card h-100">
-                                <img src="../img/santorini.jpg" class="card-img-top h-100" alt="...">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Trip Name</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <h4 class="text-muted">$2500</h4>
-                                </div>
-                            </div>
-                        </div> -->
-
-                    <!-- <p v-for="(item, i) in key">{{ key[i].Destination }}</p> -->
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <itinerary-card v-on:showKey=></itinerary-card>
+    <!-- Header Container -->
+    <div class="container-flex bg-image" style="background-image: url(../img/amalfi.jpeg); height: 50vh;"> 
+        <section class="container pt-5">
+            <section class="mb-10 text-center text-md-start"> 
+                <div class="row align-items-center"> 
+                    <div class="col-md-6 mb-4 mb-md-0"> 
+                        <h2 class="mb-4 display-3 fw-bold ls-tight"> 
+                        <span class="text-orange">Browse</span> <br> <span class="text-white">Itineraries</span> 
+                        </h2>
+                    </div> 
+                </div> 
+            </section>
+        </section>
+    </div>
+   
+    <div class="container-fluid d-flex mt-5" id="wrapper">
+        
+        <div class="row">
+            <!-- Sidebar-->
+                <!-- <div class="border bg-white" id="sidebar-wrapper">
+                    <h3 class="text-center">Filter</h3>
+        
+                    <h5 class="mx-3 mt-3 w-100">Budget</h5>
+        
+                    <div class="slidecontainer">
+                        <input type="range" min="1000" max="5000" value="1000"
+                            oninput="this.nextElementSibling.value = this.value">
+                        <output>1000</output>
                     </div>
+        
+        
+                    <h5 class="mx-3 mt-5 w-100">Countries</h5>
+                    <div class="mx-3 w-100">
+                        <input class="d-inline" type="checkbox"> Singapore <br>
+                        <input class="d-inline" type="checkbox"> Singapore <br>
+                        <input class="d-inline" type="checkbox"> Singapore <br>
+                        <input class="d-inline" type="checkbox"> Singapore
+                    </div>
+        
+                </div> -->
+        </div>
+        <div class="row">
+            
+            <div class="col">
+                <!-- Page content wrapper-->
+                <div id="page-content-wrapper">
 
-
-
-
+                    <!-- Page content-->
+                    <div id='app'>
+                        <div class="container-fluid">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <itinerary-card></itinerary-card>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
-
         </div>
+        
+        
     </div>
 
 
@@ -251,7 +205,7 @@
         var itineraryCatalog = {}
 
 
-        /* DISPLAY ININERARIES FROM THIS USER */
+        /* DISPLAY ITINERARIES*/
         onValue(ref(db, 'ItinerariesCatalog/'), (snapshot) => {
 
             //console.log(snapshot.val())
@@ -307,17 +261,8 @@
                 data() {
                     return {
                         catalog: itineraryCatalog,
-                        key: itinerary_key
                     }
                 }, // data
-
-                methods: {
-                    getKey(event) {
-                        this.$emit('clicked', 'showKey')
-                    }
-                }, // methods
-
-                emits: ['showKey'],
 
                 template: `
                                     <div v-for="(item, key) in catalog" class="col-lg-3 col-md-4 col-sm-6">
@@ -327,11 +272,9 @@
                                                 <h5 class="card-title">{{item.ItineraryName}}</h5>
                                                 <p class="card-text">{{item.Description}}</p>
                                                 <form action="itinerary.html" method="get">
-                                                    <input type="hidden" v-bind:value='key' >
-                                                    <input type="submit" value="See More"/>
+                                                    <input type="hidden" name='key' v-bind:value='key' >
+                                                    <button class="btn btn-bg text-white" input type="submit" value="See More">See More</button>
                                                 </form> 
-                                                
-                                                
                                             </div>
                 
                                             <div class="card-footer">
@@ -345,8 +288,6 @@
             app.mount('#app');
 
         })
-                    // component must be declared before app.mount(...)
-
 
 
 
