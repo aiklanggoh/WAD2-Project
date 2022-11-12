@@ -17,6 +17,9 @@
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 
+<style>
+</style>
+
 <body>
 
     <!--Nav Bar-->
@@ -64,24 +67,78 @@
         </div>
     </nav>
 
-    <div id="app" class="container mt-5 ms-1">
-        <div class="row">
-            <div class="col-3">
-                Trip Name: <input id="tripName" type="text" name="" >
+    <div id="app" class="container-fluid mt-5 ms-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Trip Name</span>
+                    <input type="text" id="tripName" class="form-control" aria-describedby="basic-addon1">
+                </div>
             </div>
-            <div class="col-3">
-                budget: <input id="budget" type="text" name="" >
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">Budget</span>
+                    <input type="text" id="budget" class="form-control" aria-describedby="basic-addon2">
+                </div>
             </div>
-            <div class="col-3">
-                destination: <input id="destination" type="text" name="">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">Origin</span>
+                    <input type="text" id="origin" v-model="origin" class="form-control"
+                        aria-describedby="basic-addon3">
+                </div>
             </div>
-            <div class="col-3">
-                description: <input id="description" type="text" name="">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon4">Destination</span>
+                    <input type="text" id="destination" class="form-control" aria-describedby="basic-addon4">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon5">Flight Start Date</span>
+                    <input type="date" v-model="date" class="form-control" aria-describedby="basic-addon5">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon6">Trip Description</span>
+                    <input type="text" id="description" class="form-control" aria-describedby="basic-addon6">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Lets Go!</button>
             </div>
         </div>
 
-        <div id="row">
-            <div class="col">
+
+        <div class="row" v-if="to_iata != '' ">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Flight date</th>
+                        <th scope="col">Average plane ticket price for Economy Class (round trip)</th>
+                        <th scope="col">Average plane ticket price for Business Class (round trip)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"> {{ date + ' to ' + end_date }} </th>
+                        <td> {{economy_avg }} </td>
+                        <td> {{business_avg }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-8">
                 <div class="row" v-for="(item, index) of trip">
                     <div class="justify-content-end d-flex">
                         <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
@@ -101,6 +158,9 @@
                             <th>
                                 Address
                             </th>
+                            <th>
+                                Action
+                            </th>
                         </tr>
                         <template v-for="(item2, index2) of item">
                             <tr>
@@ -119,24 +179,29 @@
                             </tr>
                         </template>
                         <tr>
-                            <td><input type="time" name="" :id="index + 's'"><input type="time" name=""
-                                    :id="index + 'e'"><button v-on:click="addTime(index)">Add Time</button></td>
+                            <td>
+                                <input type="time" name="" :id="index + 's'">
+                                <input type="time" name="" :id="index + 'e'">
+                                <button v-on:click="addTime(index)">Add Time</button>
+                            </td>
                         </tr>
                     </table>
                 </div>
                 <div class="justify-content-end d-flex">
+                    <button hidden class="btn btn-primary mb-3" id="insertBtn">Save!</button>
                     <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
-                    <button class="btn btn-primary mb-3" id="insertBtn">Submit</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="row " v-for="(item, index) in amazonItems">
-                    <div class="card" style="width: 18rem;">
-                        <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"> {{ item.title }} </h5>
-                            <p class="card-text"> {{ '$' + item.price }} </p>
-                            <a :href="item.link" class="btn btn-primary">Buy at Amazon</a>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-6 mb-3" v-for="(item, index) in amazonItems">
+                        <div class="card" style="width: 18rem;">
+                            <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ item.title }} </h5>
+                                <p class="card-text"> {{ '$' + item.price }} </p>
+                                <a :href="item.link" class="btn btn-primary">Buy at Amazon</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,16 +214,21 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    winter: ['winter jacket', 'winter heat packs', 'Universal Travel Adapter', 'Neck Pillow'],
-                    summer: ['sunglass', 'sunscreen lotion', 'Universal Travel Adapter', 'Neck Pillow'],
+                    winter: ['winter heat packs', 'Universal Travel Adapter', 'Neck Pillow'],
+                    summer: ['sunscreen lotion', 'Universal Travel Adapter', 'Neck Pillow'],
                     normal: ['Universal Travel Adapter', 'Neck Pillow'],
-                    date: { month: '4', day: '15' },
+                    date: '',
                     lat: '',
                     lon: '',
                     amazonItems: [],
-                    location: 'russia',
-                    trip: [],
-                    check: 0
+                    trip: [[]],
+                    check: 0,
+                    origin: '',
+                    from_iata: '',
+                    to_iata: '',
+                    economy_avg: 0,
+                    business_avg: 0,
+                    end_date: '',
                 };
             }, // data
             // computed: { 
@@ -166,58 +236,73 @@
             //         return false;
             //     }  
             // }, // computed
-            created() {
-                //this.weather()
-            },
+            // created() {
+            //     this.weather()
+            // },
             // mounted() { 
             // },
             methods: {
                 rainForest() {
-                    const rainForestApi = 'https://api.rainforestapi.com/request'
-                    if (this.temp < 18) {
-                        search_item = this.winter
-                    }
-                    else if (this.temp > 30) {
-                        search_item = this.summer
-                    }
-                    else {
-                        search_item = this.normal
-                    }
-                    for (item of search_item) {
-                        axios.get(rainForestApi, {
-                            params: {
-                                api_key: "440E156E46C4488682079EDE9AA3CA55",
-                                search_term: item,
-                                amazon_domain: 'amazon.com',
-                                type: "search"
-                            }
-                        })
-                            .then(response => {
-                                console.log(response.data);
-                                returnResult = {}
-                                returnResult.image = response.data.search_results[0].image
-                                returnResult.price = response.data.search_results[0].price.value
-                                returnResult.title = response.data.search_results[0].title
-                                returnResult.link = response.data.search_results[0].link
-                                this.amazonItems.push(returnResult)
-                                console.log(this.amazonItems)
-                            })
-                            .catch(error => {
-                                console.log(error.message);
-                            });
+                    this.amazonItems = []
+                    //use this for the real API data
+                    // const rainForestApi = 'https://api.rainforestapi.com/request'
+                    // if (this.temp < 18) {
+                    //     search_item = this.winter
+                    // }
+                    // else if (this.temp > 30) {
+                    //     search_item = this.summer
+                    // }
+                    // else {
+                    //     search_item = this.normal
+                    // }
+                    // for (item of search_item) {
+                    //     axios.get(rainForestApi, {
+                    //         params: {
+                    //             api_key: "5A61AC05F8EF4F149313844B9D00DFF1",
+                    //             search_term: item,
+                    //             amazon_domain: 'amazon.com',
+                    //             type: "search"
+                    //         }
+                    //     })
+                    //         .then(response => {
+                    //             console.log(response.data);
+                    //             returnResult = {}
+                    //             returnResult.image = response.data.search_results[0].image
+                    //             returnResult.price = response.data.search_results[0].price.value
+                    //             returnResult.title = response.data.search_results[0].title
+                    //             returnResult.link = response.data.search_results[0].link
+                    //             this.amazonItems.push(returnResult)
+                    //             console.log(this.amazonItems)
+                    //         })
+                    //         .catch(error => {
+                    //             console.log(error.message);
+                    //         });
+                    // }
+
+                    // use this if the api is not working
+                    for (let i = 0; i < 3; i++) {
+                        returnResult = {}
+                        returnResult.image = '../img/Image_not_available.png'
+                        returnResult.price = '13.50'
+                        returnResult.title = 'this api is not working bloody hell'
+                        returnResult.link = 'www.google.com'
+                        this.amazonItems.push(returnResult)
                     }
 
                 },
                 weather() {
+                    date = this.date.split('-')
+                    day = date[2]
+                    month = date[1]
                     weatherApiKey = '6KW9AM26XV6KVJGBM4Q2UK845'
                     weatherApiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?'
                     axios.get(weatherApiUrl, {
                         params: {
-                            locations: this.location,
+                            locations: destination.value,
                             aggregateHours: 24,
                             unitGroup: 'metric',
-                            startDateTime: '2019-' + this.date.month + '-' + this.date.day + 'T00:00:00',
-                            endDateTime: '2019-' + this.date.month + '-' + this.date.day + 'T00:00:00',
+                            startDateTime: '2019-' + month + '-' + day + 'T00:00:00',
+                            endDateTime: '2019-' + month + '-' + day + 'T00:00:00',
                             contentType: 'json',
                             key: weatherApiKey
                         }
@@ -227,11 +312,11 @@
                             let country = Object.values(response.data.locations)[0]
                             this.temp = country.values[0].temp
                             console.log(this.temp)
-                            //this.rainForest()
+                            this.rainForest()
                         })
                         .catch(error => {
                             console.log(error.message);
-                            // this.rainForest()
+                            this.rainForest()
                         });
                 },
                 addDay(index) {
@@ -240,15 +325,24 @@
                     if (index == 'new') {
                         this.trip.push(new_arr)
                         trip = this.trip
+                        if (this.to_iata != '') {
+                            this.flightEstimate()
+                        }
                     }
                     else {
                         this.trip.splice(index, 0, new_arr)
                         trip = this.trip
+                        if (this.to_iata != '') {
+                            this.flightEstimate()
+                        }
                     }
                 },
                 del(day) {
                     this.trip.splice(day, 1)
                     trip = this.trip
+                    if (this.to_iata != '') {
+                        this.flightEstimate()
+                    }
                 },
                 addTime(day) {
                     start_time = document.getElementById(day + 's').value
@@ -281,6 +375,214 @@
                     this_day = this.trip[day]
                     this_day.splice(time, 1)
                     trip = this.trip
+                },
+                checkFlights() {
+                    tripname = document.getElementById('tripName')
+                    if (tripname.value !== '') {
+                        if (budget.value !== '') {
+                            if (this.origin !== '') {
+                                if (destination.value !== '') {
+                                    if (this.date !== '') {
+                                        if (description.value !== '') {
+                                            document.getElementById('insertBtn').hidden = false
+                                            this.weather()
+                                            this.getIata()
+                                        }
+                                        else {
+                                            document.getElementById('insertBtn').hidden = true
+                                            alert('Please enter a description')
+                                        }
+                                    }
+                                    else {
+                                        document.getElementById('insertBtn').hidden = true
+                                        alert('Please enter a start date')
+                                    }
+                                }
+                                else {
+                                    document.getElementById('insertBtn').hidden = true
+                                    alert('Please enter a destination')
+                                }
+                            }
+                            else {
+                                document.getElementById('insertBtn').hidden = true
+                                alert('Please enter the origin')
+                            }
+                        }
+                        else {
+                            document.getElementById('insertBtn').hidden = true
+                            alert('Please enter a budget')
+                        }
+                    }
+                    else {
+                        document.getElementById('insertBtn').hidden = true
+                        alert('Please enter a trip name')
+                    }
+                },
+                getIata() {
+                    googleMapKey = 'AIzaSyDJvQ07_z4s7gXHdfECKoynPXsYPvVePAE'
+                    urlPlace = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+                    url = 'https://maps.googleapis.com/maps/api/geocode/json?'
+                    amadeusAccessToken = ''
+                    to_input = destination.value
+                    from_input = this.origin
+                    //from lat and lng
+                    axios.get(url, {
+                        params: {
+                            address: from_input,
+                            key: googleMapKey
+                        }
+                    })
+                        .then(response => {
+                            from_lat = response.data.results[0].geometry.location.lat
+                            from_lng = response.data.results[0].geometry.location.lng
+                            console.log(from_lat)
+                            console.log(from_lng)
+                            //to lat and lng
+                            axios.get(url, {
+                                params: {
+                                    address: to_input,
+                                    key: googleMapKey
+                                }
+                            })
+                                .then(response => {
+                                    to_lat = response.data.results[0].geometry.location.lat
+                                    to_lng = response.data.results[0].geometry.location.lng
+                                    console.log(to_lat)
+                                    console.log(to_lng)
+                                    //from iata
+                                    axios.get('http://www.iatageo.com/getCode/' + from_lat + '/' + from_lng)
+                                        .then(response => {
+                                            this.from_iata = response.data.IATA
+                                            console.log(this.from_iata)
+                                            axios.get('http://www.iatageo.com/getCode/' + to_lat + '/' + to_lng)
+                                                .then(response => {
+                                                    this.to_iata = response.data.IATA
+                                                    console.log(this.to_iata)
+                                                    this.flightEstimate()
+                                                })
+                                                .catch(error => {
+                                                    console.log(error.message);
+                                                });
+                                        })
+                                        .catch(error => {
+                                            console.log(error.message);
+                                        });
+
+                                })
+                                .catch(error => {
+                                    console.log(error.message);
+                                });
+
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                        });
+
+                },
+                flightEstimate() {
+                    var result = new Date(this.date);
+                    result.setDate(result.getDate() + trip.length)
+                    end_date_arr = [result.getFullYear(), result.getMonth() + 1, result.getDate()]
+                    if (end_date_arr[1] < 10) {
+                        end_date_arr[1] = 0 + String(end_date_arr[1])
+                    }
+                    if (end_date_arr[2] < 10) {
+                        end_date_arr[2] = 0 + String(end_date_arr[2])
+                    }
+                    this.end_date = end_date_arr.join('-')
+                    console.log(this.end_date)
+
+                    urlAuth = 'https://test.api.amadeus.com/v1/security/oauth2/token'
+                    flightOffer = 'https://test.api.amadeus.com/v2/shopping/flight-offers'
+                    axios.post(urlAuth, {
+                        grant_type: 'client_credentials',
+                        client_id: 'anWsVbPQ2XRKpVaqhPpAAo6kD3gWg9W4',
+                        client_secret: 'mVpJAulivwbKwyjE'
+                    },
+                        {
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                        }
+                    )
+                        .then(response => {
+                            console.log(response.data);
+                            amadeusAccessToken = response.data.access_token
+
+                            axios.get(flightOffer, {
+                                headers: {
+                                    'Authorization': `Bearer ${amadeusAccessToken}`
+                                },
+                                params: {
+                                    originLocationCode: this.from_iata,
+                                    destinationLocationCode: this.to_iata,
+                                    departureDate: this.date,
+                                    returnDate: this.end_date,
+                                    adults: 1,
+                                    children: 0,
+                                    infants: 0,
+                                    travelClass: 'ECONOMY'
+                                }
+                            })
+                                .then(response => {
+                                    console.log(response.data);
+                                    economy = response.data.data
+                                    economy_price = 0
+                                    for (let item of economy) {
+                                        economy_price += parseInt(item.price.total)
+                                    }
+                                    economy_average_price = economy_price / economy.length
+                                    this.economy_avg = economy_average_price.toFixed(2)
+                                    if (this.economy_avg == 0 || isNaN(this.economy_avg)) {
+                                        this.economy_avg = 'No tickets available'
+                                    }
+                                    else {
+                                        this.economy_avg = 'EUR ' + this.economy_avg
+                                    }
+                                    console.log(this.economy_avg)
+                                })
+                                .catch(error => {
+                                    console.log(error.message);
+                                });
+
+                            axios.get(flightOffer, {
+                                headers: {
+                                    'Authorization': `Bearer ${amadeusAccessToken}`
+                                },
+                                params: {
+                                    originLocationCode: this.from_iata,
+                                    destinationLocationCode: this.to_iata,
+                                    departureDate: this.date,
+                                    returnDate: this.end_date,
+                                    adults: 1,
+                                    children: 0,
+                                    infants: 0,
+                                    travelClass: 'BUSINESS'
+                                }
+                            })
+                                .then(response => {
+                                    console.log(response.data);
+                                    business = response.data.data
+                                    business_price = 0
+                                    for (let item of business) {
+                                        business_price += parseInt(item.price.total)
+                                    }
+                                    business_average_price = business_price / business.length
+                                    this.business_avg = business_average_price.toFixed(2)
+                                    if (this.business_avg == 0 || isNaN(this.business_avg)) {
+                                        this.business_avg = 'No tickets available'
+                                    }
+                                    else {
+                                        this.business_avg = 'EUR ' + this.business_avg
+                                    }
+                                    console.log(this.business_avg)
+                                })
+                                .catch(error => {
+                                    console.log(error.message);
+                                });
+
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                        });
                 }
             }, // methods
         });
@@ -318,7 +620,7 @@
     var destination = document.getElementById("destination")
     var description = document.getElementById("description")
     var addBtn = document.getElementById("insertBtn")
-    
+
 
     function insertData() {
         //unique id (or also can use Date.now())
@@ -333,14 +635,14 @@
             Description: description.value
         })
 
-        
+
         console.log(trip)
         var day_count = 1
         for (let day of trip) {
             var time_count = 1
             for (let time of day) {
                 //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
-                set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day" + day_count +"/activity" + time_count), { // `${{}}`
+                set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day" + day_count + "/activity" + time_count), { // `${{}}`
                     act_name: time[1],
                     time: time[0],
                     address: time[2]
@@ -361,10 +663,10 @@
 
         day_count = 1
         for (let day of trip) {
-           time_count = 1
+            time_count = 1
             for (let time of day) {
                 //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
-                set(ref(db, "/ItinerariesCatalog/" + itinerary_id + "/itinerary/day" + day_count +"/activity" + time_count), { // `${{}}`
+                set(ref(db, "/ItinerariesCatalog/" + itinerary_id + "/itinerary/day" + day_count + "/activity" + time_count), { // `${{}}`
                     act_name: time[1],
                     time: time[0],
                     address: time[2]
@@ -374,7 +676,7 @@
             day_count++
         }
 
-        
+
         set(ref(db, "/dump/" + itinerary_id), {
             ItineraryName: name.value,
             Days: trip.length,
@@ -382,14 +684,14 @@
             Destination: destination.value,
             Description: description.value
         })
-        
 
-        .then(() => {
-            alert("Data stored successfully!")
-        })
-        .catch((error) => {
-            alert("unsuccessful, " + error)
-        });
+
+            .then(() => {
+                alert("Data stored successfully!")
+            })
+            .catch((error) => {
+                alert("unsuccessful, " + error)
+            });
     }
 
     //Assign event listener
