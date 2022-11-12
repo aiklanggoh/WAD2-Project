@@ -145,7 +145,7 @@
                     </div>
                     <div class="bg-dark text-light">
                         <b style="font-size : 20px"> {{'Day ' + (index + 1)}}</b>
-                        <button class="btn btn-danger float-end" v-on:click="del(index)">Delete</button>
+                        <button class="btn btn-danger float-end py-0 my-1" v-on:click="del(index)">Delete</button>
                     </div>
                     <table class='table table-bordered table-striped text-center'>
                         <tr>
@@ -174,15 +174,27 @@
                                     <input type="text" class="form-control" v-model="item2[2]">
                                 </td>
                                 <td>
-                                    <button v-on:click="delTime(index, index2)">Delete</button>
+                                    <button type="button" class="btn btn-danger" v-on:click="delTime(index, index2)">Delete</button>
                                 </td>
                             </tr>
                         </template>
                         <tr>
-                            <td>
-                                <input type="time" name="" :id="index + 's'">
-                                <input type="time" name="" :id="index + 'e'">
-                                <button v-on:click="addTime(index)">Add Time</button>
+                            <td colspan="4">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-3">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon7">Start Time</span>
+                                            <input type="time" :id="index + 's'" class="form-control" aria-describedby="basic-addon7">
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon8">End Time</span>
+                                            <input type="time" :id="index + 'e'" class="form-control" aria-describedby="basic-addon8">
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-2"><button type="button" class="btn btn-primary" v-on:click="addTime(index)">Add Time</button></div>
+                                </div>
                             </td>
                         </tr>
                     </table>
