@@ -56,16 +56,15 @@
 
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor"
-                    id="loginPage">Login</a>
-                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3"
-                    aria-controls="#picker-editor" id="registerPage">Register</a>
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
                 <span class="px-3" id="loginUser"></span>
-                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor"
-                    id="logoutBtn">Logout</a>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
+
+    <h1 class="text-center mt-5 mb-5">Plan Itinerary</h1>
 
     <div id="app" class="container-fluid mt-5 ms-1">
         <div class="row justify-content-center">
@@ -77,8 +76,8 @@
             </div>
             <div class="col-lg-3">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon2">Budget</span>
-                    <input type="text" id="budget" class="form-control" aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">Budget ($)</span>
+                    <input type="number" id="budget" class="form-control" aria-describedby="basic-addon2">
                 </div>
             </div>
         </div>
@@ -92,7 +91,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon4">Destination</span>
+                    <span class="input-group-text" id="basic-addon4">Destination (City)</span>
                     <input type="text" id="destination" class="form-control" aria-describedby="basic-addon4">
                 </div>
             </div>
@@ -113,7 +112,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-1">
-                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Lets Go!</button>
+                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Check Flights</button>
             </div>
         </div>
 
@@ -138,7 +137,7 @@
         </div>
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-xl-10 col-lg-9 col-md-8">
                 <div class="row" v-for="(item, index) of trip">
                     <div class="justify-content-end d-flex">
                         <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
@@ -204,13 +203,13 @@
                     </table>
                 </div>
                 <div class="justify-content-end d-flex">
-                    <button hidden class="btn btn-primary mb-3" id="insertBtn">Save!</button>
+                    <button hidden class="btn btn-success mb-3 mx-2" id="insertBtn">Save Itinerary!</button>
                     <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-xl-2 col-lg-3 col-md-4 justify-content-center">
                 <div class="row">
-                    <div class="col-6 mb-3" v-for="(item, index) in amazonItems">
+                    <div class="mb-3" v-for="(item, index) in amazonItems">
                         <div class="card" style="width: 18rem;">
                             <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -698,7 +697,7 @@
         for (let day of trip) {
             var time_count = 1
             for (let time of day) {
-                //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
+                //insert properties of each day's activities
                 set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day" + day_count + "/activity" + time_count), { // `${{}}`
                     act_name: time[1],
                     time: time[0],
@@ -745,6 +744,7 @@
 
             .then(() => {
                 alert("Data stored successfully!")
+                location.href = "mytrips.html"
             })
             .catch((error) => {
                 alert("unsuccessful, " + error)
@@ -826,6 +826,8 @@
             // ... 
             loginUser = false;
             document.getElementById('logoutBtn').style.display = "none"
+            //location.href = "index.html"
+            document.getElementById('app').innerHTML = "<h2 class='text-center'>Please Login to Plan a Trip!</h2>"
         }
     });
 
@@ -836,7 +838,7 @@
         signOut(auth).then(() => {
             // Sign-out successful.
             loginUser = false;
-            location.href = "itineraries.html"
+            location.href = "index.html"
 
         }).catch((error) => {
             // An error happened. 

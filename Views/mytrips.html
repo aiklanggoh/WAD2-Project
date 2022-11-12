@@ -134,7 +134,7 @@
             //GET EACH ITINERARY UNDER CURRENT USER
             onValue(ref(db, 'AllItineraries/' + uid), (snapshot) => {
 
-                //console.log(snapshot.val())
+                console.log(snapshot.val())
                 var counter = 1
 
 
@@ -142,9 +142,9 @@
                     var itinerary_obj = snapshot.val()[itinerary_key]
                     var itinerary = itinerary_obj.itinerary
 
-                    console.log(itinerary_key)
-                    console.log(itinerary_obj)
-                    console.log(itinerary)
+                    //console.log(itinerary_key)
+                    //console.log(itinerary_obj)
+                    //console.log(itinerary)
 
 
                     // NEW ACCORDION HERE
@@ -169,7 +169,7 @@
 
                     for (let day in itinerary) {
                         let day_activities = itinerary[day]
-                        console.log(day)
+
                         //console.log(day_activities)   // this logs every activity in the current day
 
                         //NEW DAY TABLE HERE
@@ -214,10 +214,7 @@
 
                         for (let activity in day_activities) {
                             //console.log(day_activities[activity])     //this logs every activity in the list of activities in the current day
-                            console.log(day_activities[activity].time)
-                            console.log(day_activities[activity].act_name)
-                            console.log(day_activities[activity].address)
-                            console.log("------------------------------------")
+                            
 
                             //NEW ROW FOR ACTIVITY HERE
 
@@ -285,6 +282,10 @@
                 }
 
 
+                //if no trips in snapshot, display
+                if(snapshot.val() == null){
+                    document.getElementById("accordionFlushExample").innerHTML = `<h2 class="text-center pt-5">You have no planned trips!</h2>`
+                }
 
             },
                 {onlyOnce: true}
@@ -296,7 +297,7 @@
             // ... 
             loginUser = false;
             
-            document.getElementById("accordionFlushExample").innerHTML = `<h1>Please Login to View!</h1>`
+            document.getElementById("accordionFlushExample").innerHTML = `<h2 class="text-center pt-5">Please Login to View!</h2>`
             document.getElementById('logoutBtn').style.display = "none"
         }
     });
