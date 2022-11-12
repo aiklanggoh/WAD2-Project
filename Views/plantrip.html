@@ -18,6 +18,11 @@
 </head>
 
 <style>
+    .bgImage {
+        background-image: url('../img/plane-transat.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>
 
 <body>
@@ -64,55 +69,59 @@
         </div>
     </nav>
 
-    <h1 class="text-center mt-5 mb-5">Plan Itinerary</h1>
+    
 
-    <div id="app" class="container-fluid mt-5 ms-1">
-        <div class="row justify-content-center">
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Trip Name</span>
-                    <input type="text" id="tripName" class="form-control" aria-describedby="basic-addon1">
+    <div id="app" class="container-fluid ms-1">
+
+        <div class="bgImage pb-3 mb-3">
+            <h1 class="text-center pt-5 mb-5">Plan Itinerary</h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Trip Name</span>
+                        <input type="text" id="tripName" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2">Budget ($)</span>
+                        <input type="number" id="budget" class="form-control" aria-describedby="basic-addon2">
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon2">Budget ($)</span>
-                    <input type="number" id="budget" class="form-control" aria-describedby="basic-addon2">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Origin</span>
+                        <input type="text" id="origin" v-model="origin" class="form-control"
+                            aria-describedby="basic-addon3">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon4">Destination (City)</span>
+                        <input type="text" id="destination" class="form-control" aria-describedby="basic-addon4">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3">Origin</span>
-                    <input type="text" id="origin" v-model="origin" class="form-control"
-                        aria-describedby="basic-addon3">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon5">Flight Start Date</span>
+                        <input type="date" v-model="date" class="form-control" aria-describedby="basic-addon5">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon6">Trip Description</span>
+                        <input type="text" id="description" class="form-control" aria-describedby="basic-addon6">
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon4">Destination (City)</span>
-                    <input type="text" id="destination" class="form-control" aria-describedby="basic-addon4">
+            <div class="row justify-content-center">
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Check Flights</button>
                 </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon5">Flight Start Date</span>
-                    <input type="date" v-model="date" class="form-control" aria-describedby="basic-addon5">
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon6">Trip Description</span>
-                    <input type="text" id="description" class="form-control" aria-describedby="basic-addon6">
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-1">
-                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Check Flights</button>
             </div>
         </div>
 
