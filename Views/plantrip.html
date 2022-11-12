@@ -75,7 +75,7 @@
             <div class="col-lg-3">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon2">Budget</span>
-                    <input type="text" id="budget" class="form-control" aria-describedby="basic-addon2">
+                    <input type="number" id="budget" class="form-control" aria-describedby="basic-addon2">
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
         </div>
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-xl-10 col-lg-9 col-md-8">
                 <div class="row" v-for="(item, index) of trip">
                     <div class="justify-content-end d-flex">
                         <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
@@ -201,13 +201,13 @@
                     </table>
                 </div>
                 <div class="justify-content-end d-flex">
-                    <button hidden class="btn btn-primary mb-3" id="insertBtn">Save!</button>
+                    <button hidden class="btn btn-success mb-3 mx-2" id="insertBtn">Save Itinerary!</button>
                     <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-xl-2 col-lg-3 col-md-4 justify-content-center">
                 <div class="row">
-                    <div class="col-6 mb-3" v-for="(item, index) in amazonItems">
+                    <div class="mb-3" v-for="(item, index) in amazonItems">
                         <div class="card" style="width: 18rem;">
                             <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -742,6 +742,7 @@
 
             .then(() => {
                 alert("Data stored successfully!")
+                location.href = "mytrips.html"
             })
             .catch((error) => {
                 alert("unsuccessful, " + error)
