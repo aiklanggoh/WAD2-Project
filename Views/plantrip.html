@@ -721,6 +721,8 @@
             // ... 
             loginUser = false;
             document.getElementById('logoutBtn').style.display = "none"
+            //location.href = "index.html"
+            document.getElementById('app').innerHTML = "<h1>Login Required to Plan a Trip!</h1>"
         }
     });
 
@@ -731,7 +733,7 @@
         signOut(auth).then(() => {
             // Sign-out successful.
             loginUser = false;
-            location.href = "itineraries.html"
+            location.href = "index.html"
 
         }).catch((error) => {
             // An error happened. 
