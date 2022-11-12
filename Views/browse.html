@@ -154,7 +154,10 @@
                         </div> -->
 
                         <!-- <p v-for="(item, i) in key">{{ key[i].Destination }}</p> -->
-                        <itinerary-card></itinerary-card>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <itinerary-card v-on:showKey = ></itinerary-card>
+                        </div>
+                        
 
             
                         
@@ -243,9 +246,9 @@
                         }
 
                     console.log(itinerary_key_list)
-                    console.log(itinerary_key_list[0])
+                    // console.log(itinerary_key_list[0])
                     console.log(itinerary_list)
-                    // console.log(itineraryCatalog["-NGYER6C6QB1beGX-h_0"].ItineraryName)
+                    console.log(itineraryCatalog)
                     
 
                     const app = Vue.createApp({ 
@@ -254,6 +257,12 @@
                                 key: itineraryCatalog
                             };
                         }, // methods
+                        methods: {
+                            storeKey() {
+                                var currentKey = this.value
+                                alert(currentKey)
+                            }
+                        }
                         
                         });
                     
@@ -267,24 +276,32 @@
                         
                         data() {
                             return {
-                                key: itineraryCatalog,
+                                catalog: itineraryCatalog,
+                                key: itinerary_key
                             }
                         }, // data
                         
                         methods: {
-                           getKey() {
-                            console.log(this.itineraryCatalog)
+                           getKey(event) {
+                                this.$emit('clicked', 'showKey')
                            }
                         }, // methods
+
+                        emits: ['showKey'],
                         
-                        template: `<div class="row row-cols-1 row-cols-md-3 g-4">
-                                    <div v-for="(item, i) in key" class="col-lg-3 col-md-4 col-sm-6">
+                        template: `
+                                    <div v-for="(item, key) in catalog" class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="card h-100">
 
                                             <div class="card-body">
                                                 <h5 class="card-title">{{item.Destination}}</h5>
                                                 <p class="card-text">{{item.Description}}</p>
-                                                <button v-on:click="getKey" a href="../Views/japan.html" class="btn btn-primary stretched-link">See More</button>
+                                                <form action="itinerary.html" method="get">
+                                                    <input type="hidden" v-bind:value='key' >
+                                                    <input type="submit" value="See More"/>
+                                                </form> 
+                                                
+                                                
                                             </div>
                 
                                             <div class="card-footer">
@@ -292,8 +309,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                </div>`
+                                    </div>`
                     });
                 
                     app.mount('#app'); 
