@@ -245,7 +245,7 @@
                     console.log(itinerary_key_list)
                     console.log(itinerary_key_list[0])
                     console.log(itinerary_list)
-                    console.log(itineraryCatalog["-NGYER6C6QB1beGX-h_0"].ItineraryName)
+                    // console.log(itineraryCatalog["-NGYER6C6QB1beGX-h_0"].ItineraryName)
                     
 
                     const app = Vue.createApp({ 
@@ -254,6 +254,7 @@
                                 key: itineraryCatalog
                             };
                         }, // methods
+                        
                         });
                     
                     
@@ -271,9 +272,9 @@
                         }, // data
                         
                         methods: {
-                            // methodName() {
-                            //     this.$emit('submit', { key: 'value' }); // event data can be literal or object
-                            // }
+                           getKey() {
+                            console.log(this.itineraryCatalog)
+                           }
                         }, // methods
                         
                         template: `<div class="row row-cols-1 row-cols-md-3 g-4">
@@ -283,7 +284,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title">{{item.Destination}}</h5>
                                                 <p class="card-text">{{item.Description}}</p>
-                                                <a href="../Views/japan.html" class="btn btn-primary stretched-link">See More</a>
+                                                <button v-on:click="getKey" a href="../Views/japan.html" class="btn btn-primary stretched-link">See More</button>
                                             </div>
                 
                                             <div class="card-footer">
