@@ -222,7 +222,7 @@
                     // for (item of search_item) {
                     //     axios.get(rainForestApi, {
                     //         params: {
-                    //             api_key: "440E156E46C4488682079EDE9AA3CA55",
+                    //             api_key: "5A61AC05F8EF4F149313844B9D00DFF1",
                     //             search_term: item,
                     //             amazon_domain: 'amazon.com',
                     //             type: "search"
@@ -243,7 +243,7 @@
                     //         });
                     // }
 
-                    //use this if the api is not working
+                    // use this if the api is not working
                     for (let i = 0; i < 3; i++) {
                         returnResult = {}
                         returnResult.image = '../img/Image_not_available.png'
@@ -300,6 +300,7 @@
                 del(day) {
                     this.trip.splice(day, 1)
                     trip = this.trip
+                    this.flightEstimate()
                 },
                 addTime(day) {
                     start_time = document.getElementById(day + 's').value

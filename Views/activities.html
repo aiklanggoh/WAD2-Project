@@ -94,7 +94,7 @@
                     <template v-for="(item, index) in activities">
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='FREE!!!'">
                             <div class="card h-100">
-                                <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.src='../img/Image_not_available.png'">
+                                <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.onerror=null;this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
                                     <a :href="item.link" class="btn btn-primary stretched-link">See More</a>
@@ -197,7 +197,7 @@
                                 user.price = 'FREE!!!'
                             }
                             else {
-                                user.price = data.price.amount
+                                user.price = parseInt(data.price.amount)
                             }
                             this.activities.push(user)
 
@@ -211,6 +211,7 @@
                             else if (data.price.amount < this.min_price) {
                                 this.min_price = data.price.amount
                             }
+                            console.log(typeof(user.price))
                         }
                         this.set_price = this.max_price
                         console.log(this.activities)
