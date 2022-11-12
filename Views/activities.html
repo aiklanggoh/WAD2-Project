@@ -37,7 +37,7 @@
                         <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="itineraries.html">Browse Itineraries</a>
+                        <a class="nav-link" href="browse.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="plantrip.html">Plan Trip</a>
@@ -94,10 +94,10 @@
                     <template v-for="(item, index) in activities">
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='FREE!!!'">
                             <div class="card h-100">
-                                <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.src='../img/Image_not_available.png'">
+                                <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.onerror=null;this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
-                                    <a href="#" class="btn btn-primary stretched-link">See More</a>
+                                    <a :href="item.link" class="btn btn-primary stretched-link">See More</a>
                                 </div>
                                 <div class="card-footer">
                                     <h4 class="text-muted" v-if="item.price == 'FREE!!!'">{{ item.price}}</h4>
@@ -192,11 +192,12 @@
                             user.name = data.name
                             user.des = data.shortDescription
                             user.pic = data.pictures[0]
+                            user.link = data.bookingLink
                             if (data.price.amount == '0.0') {
                                 user.price = 'FREE!!!'
                             }
                             else {
-                                user.price = data.price.amount
+                                user.price = parseInt(data.price.amount)
                             }
                             this.activities.push(user)
 
@@ -210,6 +211,7 @@
                             else if (data.price.amount < this.min_price) {
                                 this.min_price = data.price.amount
                             }
+                            console.log(typeof(user.price))
                         }
                         this.set_price = this.max_price
                         console.log(this.activities)
@@ -307,7 +309,7 @@
         signOut(auth).then(() => { 
             // Sign-out successful.
             loginUser = false; 
-            location.href = "itineraries.html"
+            location.href = "activities.html"
         
         }).catch((error) => { 
             // An error happened. 

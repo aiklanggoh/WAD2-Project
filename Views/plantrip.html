@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,32 +11,38 @@
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-    <style>
-        
-
-    </style>
-
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
+
+<style>
+</style>
+
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-light" style="position: sticky;">
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">TriPPlaner</a>
+            <div class="d-flex">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand mx-3" href="index">TriPPlaner</a>
+            </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="itineraries.html">Browse Itineraries</a>
+                        <a class="nav-link" href="browse.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="plantrip.html">Plan Trip</a>
+                        <a class="nav-link" href="plantrip.html">Plan Trip</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="activities.html">Activities</a>
@@ -45,47 +52,98 @@
                     </li>
                 </ul>
 
-                
-                <div class="d-flex">
-                    <a href="login.html" class="btn btn-primary" role="button">Login</a>
-                    <a href="register.html" class="btn btn-primary" role="button">Register</a>
-                </div>
-            </div>
 
-            
+
+            </div>
+            <div class="d-flex align-items-center">
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <span class="px-3" id="loginUser"></span>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
+            </div>
         </div>
     </nav>
 
-
-
-    <div class="container-fluid mt-5">
-
-        <div class="justify-content-end d-flex">
-            <button class="btn btn-primary mb-3" onclick="addDay()">Add Day</button>
+    <div id="app" class="container-fluid mt-5 ms-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Trip Name</span>
+                    <input type="text" id="tripName" class="form-control" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">Budget</span>
+                    <input type="text" id="budget" class="form-control" aria-describedby="basic-addon2">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">Origin</span>
+                    <input type="text" id="origin" v-model="origin" class="form-control"
+                        aria-describedby="basic-addon3">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon4">Destination</span>
+                    <input type="text" id="destination" class="form-control" aria-describedby="basic-addon4">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon5">Flight Start Date</span>
+                    <input type="date" v-model="date" class="form-control" aria-describedby="basic-addon5">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon6">Trip Description</span>
+                    <input type="text" id="description" class="form-control" aria-describedby="basic-addon6">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-primary" v-on:click="checkFlights()">Lets Go!</button>
+            </div>
         </div>
 
-        <div id="res">
+
+        <div class="row" v-if="to_iata != '' ">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Flight date</th>
+                        <th scope="col">Average plane ticket price for Economy Class (round trip)</th>
+                        <th scope="col">Average plane ticket price for Business Class (round trip)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"> {{ date + ' to ' + end_date }} </th>
+                        <td> {{economy_avg }} </td>
+                        <td> {{business_avg }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <script>  // to add table
-
-            var count = 0;
-
-            function addDay() {
-
-                var divEl = document.getElementById("res");
-                count += 1
-
-                str = 
-        
-                `<div id="${count}" class="row">
-
-                    <div class="bg-dark text-light">
-                        <b style="font-size : 20px">Day <input type='number' min=1 style="width : 40px"></b> 
-
-                        <button class="btn btn-danger float-end" onclick="del(${count})"">Delete</button>
+        <div class="row">
+            <div class="col-8">
+                <div class="row" v-for="(item, index) of trip">
+                    <div class="justify-content-end d-flex">
+                        <button class="btn btn-primary mb-3" v-on:click="addDay(index)">Add Day</button>
                     </div>
-
+                    <div class="bg-dark text-light">
+                        <b style="font-size : 20px"> {{'Day ' + (index + 1)}}</b>
+                        <button class="btn btn-danger float-end" v-on:click="del(index)">Delete</button>
+                    </div>
                     <table class='table table-bordered table-striped text-center'>
                         <tr>
                             <th>
@@ -97,319 +155,603 @@
                             <th>
                                 Address
                             </th>
+                            <th>
+                                Action
+                            </th>
                         </tr>
-
+                        <template v-for="(item2, index2) of item">
+                            <tr>
+                                <td>
+                                    {{item2[0]}}
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" v-model="item2[1]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" v-model="item2[2]">
+                                </td>
+                                <td>
+                                    <button v-on:click="delTime(index, index2)">Delete</button>
+                                </td>
+                            </tr>
+                        </template>
                         <tr>
                             <td>
-                                0000 - 0100
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
+                                <input type="time" name="" :id="index + 's'">
+                                <input type="time" name="" :id="index + 'e'">
+                                <button v-on:click="addTime(index)">Add Time</button>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                0100 - 0200
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0200 - 0300
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0300 - 0400
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0400 - 0500
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0500 - 0600
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0600 - 0700
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0700 - 0800
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0800 - 0900
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                0900 - 1000
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1000 - 1100
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1100 - 1200
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1200 - 1300
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1300 - 1400
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1400 - 1500
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1500 - 1600
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1600 - 1700
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1700 - 1800
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1800 - 1900
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                1900 - 2000
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2000 - 2100
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2100 - 2200
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2200 - 2300
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                2300 - 0000
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-
-                </div>`
-                
-                divEl.innerHTML += str
-            }
-
-
-            function del(count) {
-                var rootEl = document.getElementById(count)
-                rootEl.remove();
-            }
-
-            
-        </script>
-        
-        
-
+                    </table>
+                </div>
+                <div class="justify-content-end d-flex">
+                    <button hidden class="btn btn-primary mb-3" id="insertBtn">Save!</button>
+                    <button class="btn btn-primary mb-3" v-on:click="addDay('new')">Add Day</button>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-6 mb-3" v-for="(item, index) in amazonItems">
+                        <div class="card" style="width: 18rem;">
+                            <img :src="item.image" style="height: 200px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ item.title }} </h5>
+                                <p class="card-text"> {{ '$' + item.price }} </p>
+                                <a :href="item.link" class="btn btn-primary">Buy at Amazon</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script>
+        trip = []
+        const app = Vue.createApp({
+            data() {
+                return {
+                    winter: ['winter heat packs', 'Universal Travel Adapter', 'Neck Pillow'],
+                    summer: ['sunscreen lotion', 'Universal Travel Adapter', 'Neck Pillow'],
+                    normal: ['Universal Travel Adapter', 'Neck Pillow'],
+                    date: '',
+                    lat: '',
+                    lon: '',
+                    amazonItems: [],
+                    trip: [[]],
+                    check: 0,
+                    origin: '',
+                    from_iata: '',
+                    to_iata: '',
+                    economy_avg: 0,
+                    business_avg: 0,
+                    end_date: '',
+                };
+            }, // data
+            // computed: { 
+            //     derivedProperty() {
+            //         return false;
+            //     }  
+            // }, // computed
+            // created() {
+            //     this.weather()
+            // },
+            // mounted() { 
+            // },
+            methods: {
+                rainForest() {
+                    this.amazonItems = []
+                    //use this for the real API data
+                    // const rainForestApi = 'https://api.rainforestapi.com/request'
+                    // if (this.temp < 18) {
+                    //     search_item = this.winter
+                    // }
+                    // else if (this.temp > 30) {
+                    //     search_item = this.summer
+                    // }
+                    // else {
+                    //     search_item = this.normal
+                    // }
+                    // for (item of search_item) {
+                    //     axios.get(rainForestApi, {
+                    //         params: {
+                    //             api_key: "5A61AC05F8EF4F149313844B9D00DFF1",
+                    //             search_term: item,
+                    //             amazon_domain: 'amazon.com',
+                    //             type: "search"
+                    //         }
+                    //     })
+                    //         .then(response => {
+                    //             console.log(response.data);
+                    //             returnResult = {}
+                    //             returnResult.image = response.data.search_results[0].image
+                    //             returnResult.price = response.data.search_results[0].price.value
+                    //             returnResult.title = response.data.search_results[0].title
+                    //             returnResult.link = response.data.search_results[0].link
+                    //             this.amazonItems.push(returnResult)
+                    //             console.log(this.amazonItems)
+                    //         })
+                    //         .catch(error => {
+                    //             console.log(error.message);
+                    //         });
+                    // }
 
-    
+                    // use this if the api is not working
+                    for (let i = 0; i < 3; i++) {
+                        returnResult = {}
+                        returnResult.image = '../img/Image_not_available.png'
+                        returnResult.price = '13.50'
+                        returnResult.title = 'this api is not working bloody hell'
+                        returnResult.link = 'www.google.com'
+                        this.amazonItems.push(returnResult)
+                    }
+
+                },
+                weather() {
+                    date = this.date.split('-')
+                    day = date[2]
+                    month = date[1]
+                    weatherApiKey = '6KW9AM26XV6KVJGBM4Q2UK845'
+                    weatherApiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?'
+                    axios.get(weatherApiUrl, {
+                        params: {
+                            locations: destination.value,
+                            aggregateHours: 24,
+                            unitGroup: 'metric',
+                            startDateTime: '2019-' + month + '-' + day + 'T00:00:00',
+                            endDateTime: '2019-' + month + '-' + day + 'T00:00:00',
+                            contentType: 'json',
+                            key: weatherApiKey
+                        }
+                    })
+                        .then(response => {
+                            console.log(response.data);
+                            let country = Object.values(response.data.locations)[0]
+                            this.temp = country.values[0].temp
+                            console.log(this.temp)
+                            this.rainForest()
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                            this.rainForest()
+                        });
+                },
+                addDay(index) {
+                    new_arr = []
+
+                    if (index == 'new') {
+                        this.trip.push(new_arr)
+                        trip = this.trip
+                        if (this.to_iata != '') {
+                            this.flightEstimate()
+                        }
+                    }
+                    else {
+                        this.trip.splice(index, 0, new_arr)
+                        trip = this.trip
+                        if (this.to_iata != '') {
+                            this.flightEstimate()
+                        }
+                    }
+                },
+                del(day) {
+                    this.trip.splice(day, 1)
+                    trip = this.trip
+                    if (this.to_iata != '') {
+                        this.flightEstimate()
+                    }
+                },
+                addTime(day) {
+                    start_time = document.getElementById(day + 's').value
+                    end_time = document.getElementById(day + 'e').value
+                    if (parseInt(start_time.split(":").join('')) < parseInt(end_time.split(":").join(''))) {
+                        if (this.trip[day].length == 0) {
+                            this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                            trip = this.trip
+                        }
+                        else {
+                            this_day = this.trip[day]
+                            previous_time_slot = this_day[this_day.length - 1]
+                            previous_end_time = previous_time_slot[0].split(' - ')[1]
+                            previous_end_time_int = parseInt(previous_end_time.split(':').join(''))
+                            if (previous_end_time_int > parseInt(start_time.split(":").join(''))) {
+                                alert('your start time is earlier than previous end time')
+                            }
+                            else {
+                                this.trip[day].push([start_time + ' - ' + end_time, '', ''])
+                                trip = this.trip
+                            }
+                        }
+                    }
+                    else {
+                        alert('your start time is later then the end time or the same as end time')
+                    }
+
+                },
+                delTime(day, time) {
+                    this_day = this.trip[day]
+                    this_day.splice(time, 1)
+                    trip = this.trip
+                },
+                checkFlights() {
+                    tripname = document.getElementById('tripName')
+                    if (tripname.value !== '') {
+                        if (budget.value !== '') {
+                            if (this.origin !== '') {
+                                if (destination.value !== '') {
+                                    if (this.date !== '') {
+                                        if (description.value !== '') {
+                                            document.getElementById('insertBtn').hidden = false
+                                            this.weather()
+                                            this.getIata()
+                                        }
+                                        else {
+                                            document.getElementById('insertBtn').hidden = true
+                                            alert('Please enter a description')
+                                        }
+                                    }
+                                    else {
+                                        document.getElementById('insertBtn').hidden = true
+                                        alert('Please enter a start date')
+                                    }
+                                }
+                                else {
+                                    document.getElementById('insertBtn').hidden = true
+                                    alert('Please enter a destination')
+                                }
+                            }
+                            else {
+                                document.getElementById('insertBtn').hidden = true
+                                alert('Please enter the origin')
+                            }
+                        }
+                        else {
+                            document.getElementById('insertBtn').hidden = true
+                            alert('Please enter a budget')
+                        }
+                    }
+                    else {
+                        document.getElementById('insertBtn').hidden = true
+                        alert('Please enter a trip name')
+                    }
+                },
+                getIata() {
+                    googleMapKey = 'AIzaSyDJvQ07_z4s7gXHdfECKoynPXsYPvVePAE'
+                    urlPlace = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
+                    url = 'https://maps.googleapis.com/maps/api/geocode/json?'
+                    amadeusAccessToken = ''
+                    to_input = destination.value
+                    from_input = this.origin
+                    //from lat and lng
+                    axios.get(url, {
+                        params: {
+                            address: from_input,
+                            key: googleMapKey
+                        }
+                    })
+                        .then(response => {
+                            from_lat = response.data.results[0].geometry.location.lat
+                            from_lng = response.data.results[0].geometry.location.lng
+                            console.log(from_lat)
+                            console.log(from_lng)
+                            //to lat and lng
+                            axios.get(url, {
+                                params: {
+                                    address: to_input,
+                                    key: googleMapKey
+                                }
+                            })
+                                .then(response => {
+                                    to_lat = response.data.results[0].geometry.location.lat
+                                    to_lng = response.data.results[0].geometry.location.lng
+                                    console.log(to_lat)
+                                    console.log(to_lng)
+                                    //from iata
+                                    axios.get('http://www.iatageo.com/getCode/' + from_lat + '/' + from_lng)
+                                        .then(response => {
+                                            this.from_iata = response.data.IATA
+                                            console.log(this.from_iata)
+                                            axios.get('http://www.iatageo.com/getCode/' + to_lat + '/' + to_lng)
+                                                .then(response => {
+                                                    this.to_iata = response.data.IATA
+                                                    console.log(this.to_iata)
+                                                    this.flightEstimate()
+                                                })
+                                                .catch(error => {
+                                                    console.log(error.message);
+                                                });
+                                        })
+                                        .catch(error => {
+                                            console.log(error.message);
+                                        });
+
+                                })
+                                .catch(error => {
+                                    console.log(error.message);
+                                });
+
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                        });
+
+                },
+                flightEstimate() {
+                    var result = new Date(this.date);
+                    result.setDate(result.getDate() + trip.length)
+                    end_date_arr = [result.getFullYear(), result.getMonth() + 1, result.getDate()]
+                    if (end_date_arr[1] < 10) {
+                        end_date_arr[1] = 0 + String(end_date_arr[1])
+                    }
+                    if (end_date_arr[2] < 10) {
+                        end_date_arr[2] = 0 + String(end_date_arr[2])
+                    }
+                    this.end_date = end_date_arr.join('-')
+                    console.log(this.end_date)
+
+                    urlAuth = 'https://test.api.amadeus.com/v1/security/oauth2/token'
+                    flightOffer = 'https://test.api.amadeus.com/v2/shopping/flight-offers'
+                    axios.post(urlAuth, {
+                        grant_type: 'client_credentials',
+                        client_id: 'anWsVbPQ2XRKpVaqhPpAAo6kD3gWg9W4',
+                        client_secret: 'mVpJAulivwbKwyjE'
+                    },
+                        {
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                        }
+                    )
+                        .then(response => {
+                            console.log(response.data);
+                            amadeusAccessToken = response.data.access_token
+
+                            axios.get(flightOffer, {
+                                headers: {
+                                    'Authorization': `Bearer ${amadeusAccessToken}`
+                                },
+                                params: {
+                                    originLocationCode: this.from_iata,
+                                    destinationLocationCode: this.to_iata,
+                                    departureDate: this.date,
+                                    returnDate: this.end_date,
+                                    adults: 1,
+                                    children: 0,
+                                    infants: 0,
+                                    travelClass: 'ECONOMY'
+                                }
+                            })
+                                .then(response => {
+                                    console.log(response.data);
+                                    economy = response.data.data
+                                    economy_price = 0
+                                    for (let item of economy) {
+                                        economy_price += parseInt(item.price.total)
+                                    }
+                                    economy_average_price = economy_price / economy.length
+                                    this.economy_avg = economy_average_price.toFixed(2)
+                                    if (this.economy_avg == 0 || isNaN(this.economy_avg)) {
+                                        this.economy_avg = 'No tickets available'
+                                    }
+                                    else {
+                                        this.economy_avg = 'EUR ' + this.economy_avg
+                                    }
+                                    console.log(this.economy_avg)
+                                })
+                                .catch(error => {
+                                    console.log(error.message);
+                                });
+
+                            axios.get(flightOffer, {
+                                headers: {
+                                    'Authorization': `Bearer ${amadeusAccessToken}`
+                                },
+                                params: {
+                                    originLocationCode: this.from_iata,
+                                    destinationLocationCode: this.to_iata,
+                                    departureDate: this.date,
+                                    returnDate: this.end_date,
+                                    adults: 1,
+                                    children: 0,
+                                    infants: 0,
+                                    travelClass: 'BUSINESS'
+                                }
+                            })
+                                .then(response => {
+                                    console.log(response.data);
+                                    business = response.data.data
+                                    business_price = 0
+                                    for (let item of business) {
+                                        business_price += parseInt(item.price.total)
+                                    }
+                                    business_average_price = business_price / business.length
+                                    this.business_avg = business_average_price.toFixed(2)
+                                    if (this.business_avg == 0 || isNaN(this.business_avg)) {
+                                        this.business_avg = 'No tickets available'
+                                    }
+                                    else {
+                                        this.business_avg = 'EUR ' + this.business_avg
+                                    }
+                                    console.log(this.business_avg)
+                                })
+                                .catch(error => {
+                                    console.log(error.message);
+                                });
+
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                        });
+                }
+            }, // methods
+        });
+        const vm = app.mount('#app');
+    </script>
+
 </body>
 
 
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set, update, get, push, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBTz07CsUuC8llduTdGo_e81mWjQcdw8oI",
+        authDomain: "wad2-tripplanner.firebaseapp.com",
+        projectId: "wad2-tripplanner",
+        storageBucket: "wad2-tripplanner.appspot.com",
+        messagingSenderId: "1078917579599",
+        appId: "1:1078917579599:web:d59344d7b81a0cb1e97b3a",
+        databaseURL: "https://wad2-tripplanner-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+
+    // connect to the realtime database
+    const db = getDatabase(firebaseApp);
+
+    //Element Refereneces
+    var name = document.getElementById("tripName")
+    var budget = document.getElementById("budget")
+    var destination = document.getElementById("destination")
+    var description = document.getElementById("description")
+    var addBtn = document.getElementById("insertBtn")
+
+
+    function insertData() {
+        //unique id (or also can use Date.now())
+        var itinerary_id = push(child(ref(db), "Itineraries")).key
+
+        //main properties of itinerary: trip name, duration, image url
+        set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id), {
+            ItineraryName: name.value,
+            Days: trip.length,
+            Budget: budget.value,
+            Destination: destination.value,
+            Description: description.value
+        })
+
+
+        console.log(trip)
+        var day_count = 1
+        for (let day of trip) {
+            var time_count = 1
+            for (let time of day) {
+                //insert properties of each day's activities
+                set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day" + day_count + "/activity" + time_count), { // `${{}}`
+                    act_name: time[1],
+                    time: time[0],
+                    address: time[2]
+                })
+                time_count++
+            }
+            day_count++
+        }
+
+
+        set(ref(db, "/ItinerariesCatalog/" + itinerary_id), {
+            ItineraryName: name.value,
+            Days: trip.length,
+            Budget: budget.value,
+            Destination: destination.value,
+            Description: description.value
+        })
+
+        day_count = 1
+        for (let day of trip) {
+            time_count = 1
+            for (let time of day) {
+                //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
+                set(ref(db, "/ItinerariesCatalog/" + itinerary_id + "/itinerary/day" + day_count + "/activity" + time_count), { // `${{}}`
+                    act_name: time[1],
+                    time: time[0],
+                    address: time[2]
+                })
+                time_count++
+            }
+            day_count++
+        }
+
+
+        set(ref(db, "/dump/" + itinerary_id), {
+            ItineraryName: name.value,
+            Days: trip.length,
+            Budget: budget.value,
+            Destination: destination.value,
+            Description: description.value
+        })
+
+
+            .then(() => {
+                alert("Data stored successfully!")
+            })
+            .catch((error) => {
+                alert("unsuccessful, " + error)
+            });
+    }
+
+    //Assign event listener
+    addBtn.addEventListener('click', insertData)
+
+    /* AUTHENTICATION CODE: START */
+    import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    var loginUser = false; // Current Logged In User, false if not logged in.
+
+    // when authentication status changed 
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties 
+            // https://firebase.google.com/docs/reference/js/firebase.User
+
+            const uid = user.uid;
+            // ... 
+            loginUser = user;
+            document.getElementById('loginPage').style.display = "none"
+            document.getElementById('registerPage').style.display = "none"
+            document.getElementById('loginUser').innerText = `Current User: ${user.email}`;
+
+
+
+        } else {
+            // User is signed out 
+            // ... 
+            loginUser = false;
+            document.getElementById('logoutBtn').style.display = "none"
+        }
+    });
+
+
+
+    // logout 
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            loginUser = false;
+            location.href = "itineraries.html"
+
+        }).catch((error) => {
+            // An error happened. 
+            console.log(error);
+        });
+    }); /* AUTHENTICATION CODE: END */
+
+
+
+
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
 
 
 </html>
