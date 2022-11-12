@@ -158,7 +158,7 @@
                         </h2>
                         <div id="flush${counter}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body" id="trip${counter}">
-                                <button class="btn btn-danger my-3" id="deleteTrip${counter}">Delete</button>
+                                <button class="btn btn-danger my-3" id="deleteTrip${counter}" value="${itinerary_key}">Delete</button>
 
                             </div>
                         </div>
@@ -252,26 +252,30 @@
 
                     }
 
-
-                    //DELETE TRIP FUNCTION
-                    function deleteTrip(){
-                        remove(ref(db, "AllItineraries/" + uid + "/" + itinerary_key))
-                        .then(() => {
-                            alert("Trip Deleted Successfully!")
-                            location.reload()
-                        })
-                        .catch((error) => {
-                            alert("Unsuccessful, Error: " + error)
-                        })
-                    }
-
-                    var deleteBtn = document.getElementById(`deleteTrip${counter}`)
-                    deleteBtn.addEventListener('click', deleteTrip)
-                    
-
-
                     counter += 1;
                 }
+
+                
+                
+                //DELETE TRIP FUNCTION
+                for(let i = 1; i < counter; i++){
+                    //console.log(i)
+                    function deleteTrip(){
+                        remove(ref(db, "AllItineraries/" + uid + "/" + document.getElementById(`deleteTrip${i}`).value))
+                            .then(() => {
+                                alert("Trip Deleted Successfully!")
+                                location.reload()
+                            })
+                            .catch((error) => {
+                                alert("Unsuccessful, Error: " + error)
+                            })
+                    }
+
+                    let deleteBtn = document.getElementById(`deleteTrip${i}`)
+                    deleteBtn.addEventListener('click', deleteTrip)
+                }
+
+
 
             },
                 {onlyOnce: true}

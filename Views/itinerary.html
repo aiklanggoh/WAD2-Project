@@ -408,7 +408,7 @@
                 update(ref(db, "/ItinerariesCatalog/" + key + "/comments/" + loginUser.uid), {
                     commenter: loginUser.displayName,
                     comment: document.getElementById("myComment").value,
-                    dateTime: date + ', ' + time
+                    dateTime: date + ' at ' + time
                 })
 
                 alert("Comment Submitted!")
