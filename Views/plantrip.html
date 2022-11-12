@@ -56,13 +56,10 @@
 
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor"
-                    id="loginPage">Login</a>
-                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3"
-                    aria-controls="#picker-editor" id="registerPage">Register</a>
+                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
                 <span class="px-3" id="loginUser"></span>
-                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor"
-                    id="logoutBtn">Logout</a>
+                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
@@ -641,7 +638,7 @@
         for (let day of trip) {
             var time_count = 1
             for (let time of day) {
-                //insert properties of each day's activities (CURRENTLY HARDCODED FOR VISUALISATION) <------------------------------------
+                //insert properties of each day's activities
                 set(ref(db, "/AllItineraries/" + loginUser.uid + "/" + itinerary_id + "/itinerary/day" + day_count + "/activity" + time_count), { // `${{}}`
                     act_name: time[1],
                     time: time[0],
