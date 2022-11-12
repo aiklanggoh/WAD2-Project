@@ -37,7 +37,7 @@
                         <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="browse.html">Browse Itineraries</a>
+                        <a class="nav-link" href="itineraries.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="plantrip.html">Plan Trip</a>
@@ -177,7 +177,8 @@
                         accord.appendChild(tripContainer)
 
                         let dayRow = document.createElement("div")
-                        dayRow.setAttribute("class", "row bg-info dayStyle")
+                        dayRow.setAttribute("class", "row")
+                        dayRow.setAttribute("class", "bg-info")
                         tripContainer.appendChild(dayRow)
 
                         let dayCol = document.createElement("div")
@@ -188,7 +189,7 @@
 
 
                         let headerRow = document.createElement("div")
-                        headerRow.setAttribute("class", "row headStyle bg-light text-center")
+                        headerRow.setAttribute("class", "row")
                         tripContainer.appendChild(headerRow)
 
                         let headerItem1 = document.createElement("div")
@@ -221,7 +222,7 @@
                             //NEW ROW FOR ACTIVITY HERE
 
                             let activityRow = document.createElement("div")
-                            activityRow.setAttribute("class", "row activityStyle bg-light text-center")
+                            activityRow.setAttribute("class", "row")
                             tripContainer.appendChild(activityRow)
 
 
@@ -242,6 +243,7 @@
                             activityRow.appendChild(activityItem3)
 
                             
+
                         }
 
                     }
@@ -259,7 +261,7 @@
             // ... 
             loginUser = false;
             
-            document.getElementById("accordionFlushExample").innerHTML = `<p>Please Login to View!</p>`
+            //document.getElementById("accordionFlushExample").style.display = "none"
             document.getElementById('logoutBtn').style.display = "none"
         }
     });
