@@ -56,6 +56,7 @@
     <h1 class="mt-5" id="target"></h1>
     Trip Name:<input type="text" id="tripName"><br>
     Number of Days:<input type="text" id="noDays"><br>
+    Choose Pic: <input type="file" id="myfile"> <br>
 
     <button name="insertBtn" id="insertBtn">Insert to DB</button> <br> <br> <br>
 
@@ -112,6 +113,7 @@
         //Element Refereneces
         var name = document.getElementById("tripName")
         var days = document.getElementById("noDays")
+        var imgfile = document.getElementById("myfile")
         var addBtn = document.getElementById("insertBtn")
 
         //Insert Data
