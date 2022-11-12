@@ -67,9 +67,9 @@
 
 
     <div class="container-fluid">
+        <h1 class="text-center my-5">My Planned Trips</h1>
 
-
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion accordion-flush px-5" id="accordionFlushExample">
 
             <!-- ACCORDION ITEMS FOR EACH TRIP -->
 
@@ -86,7 +86,7 @@
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
-    import { getDatabase, ref, onValue, set, update, get, push, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+    import { getDatabase, ref, onValue, set, update, get, push, child, remove } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -158,7 +158,8 @@
                         </h2>
                         <div id="flush${counter}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body" id="trip${counter}">
-                        
+                                <button class="btn btn-danger my-3" id="deleteTrip${counter}" value="${itinerary_key}">Delete</button>
+
                             </div>
                         </div>
                     </div>
@@ -221,37 +222,73 @@
                             //NEW ROW FOR ACTIVITY HERE
 
                             let activityRow = document.createElement("div")
-                            activityRow.setAttribute("class", "row activityStyle bg-light text-center")
+                            activityRow.setAttribute("class", "row activityStyle bg-light text-center border-bottom")
                             tripContainer.appendChild(activityRow)
 
 
                             let activityItem1 = document.createElement("div")
-                            activityItem1.setAttribute("class", "col-2")
+                            activityItem1.setAttribute("class", "col-2 py-1")
                             activityItem1.appendChild(document.createTextNode(day_activities[activity].time))
 
                             let activityItem2 = document.createElement("div")
-                            activityItem2.setAttribute("class", "col-5")
+                            activityItem2.setAttribute("class", "col-5 py-1")
                             activityItem2.appendChild(document.createTextNode(day_activities[activity].act_name))
 
                             let activityItem3 = document.createElement("div")
-                            activityItem3.setAttribute("class", "col-5")
+                            activityItem3.setAttribute("class", "col-5 py-1")
                             activityItem3.appendChild(document.createTextNode(day_activities[activity].address))
 
                             activityRow.appendChild(activityItem1)
                             activityRow.appendChild(activityItem2)
                             activityRow.appendChild(activityItem3)
 
+
+                            //let sep = document.createElement("hr")
+                            //sep.setAttribute("class", "bg-light")
+                            //tripContainer.appendChild(sep)
+                            
                             
                         }
 
                     }
 
-
-
                     counter += 1;
                 }
 
-            })
+                
+                
+                //DELETE TRIP FUNCTION
+                for(let i = 1; i < counter; i++){
+                    //console.log(i)
+                    function deleteTrip(){
+                        remove(ref(db, "AllItineraries/" + uid + "/" + document.getElementById(`deleteTrip${i}`).value))
+                            .then(() => {
+                                
+                            })
+                            .catch((error) => {
+                                
+                            })
+
+
+                        remove(ref(db, "ItinerariesCatalog/" + document.getElementById(`deleteTrip${i}`).value))
+                            .then(() => {
+                                alert("Trip Deleted Successfully!")
+                                location.reload()
+                            })
+                            .catch((error) => {
+                                alert("Unsuccessful, Error: " + error)
+                            })    
+                    }
+
+                    let deleteBtn = document.getElementById(`deleteTrip${i}`)
+                    deleteBtn.addEventListener('click', deleteTrip)
+                }
+
+
+
+            },
+                {onlyOnce: true}
+            )
 
 
         } else {
@@ -259,7 +296,7 @@
             // ... 
             loginUser = false;
             
-            document.getElementById("accordionFlushExample").innerHTML = `<p>Please Login to View!</p>`
+            document.getElementById("accordionFlushExample").innerHTML = `<h1>Please Login to View!</h1>`
             document.getElementById('logoutBtn').style.display = "none"
         }
     });
