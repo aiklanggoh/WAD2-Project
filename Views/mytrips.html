@@ -253,6 +253,7 @@
                     }
 
 
+                    //DELETE TRIP FUNCTION
                     function deleteTrip(){
                         remove(ref(db, "AllItineraries/" + uid + "/" + itinerary_key))
                         .then(() => {
