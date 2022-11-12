@@ -67,9 +67,9 @@
 
 
     <div class="container-fluid">
+        <h1 class="text-center my-5">My Planned Trips</h1>
 
-
-        <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion accordion-flush px-5" id="accordionFlushExample">
 
             <!-- ACCORDION ITEMS FOR EACH TRIP -->
 
@@ -221,7 +221,7 @@
                             //NEW ROW FOR ACTIVITY HERE
 
                             let activityRow = document.createElement("div")
-                            activityRow.setAttribute("class", "row activityStyle bg-light text-center")
+                            activityRow.setAttribute("class", "row activityStyle bg-light text-center border-bottom")
                             tripContainer.appendChild(activityRow)
 
 
@@ -241,6 +241,11 @@
                             activityRow.appendChild(activityItem2)
                             activityRow.appendChild(activityItem3)
 
+
+                            //let sep = document.createElement("hr")
+                            //sep.setAttribute("class", "bg-light")
+                            //tripContainer.appendChild(sep)
+                            
                             
                         }
 
@@ -259,7 +264,7 @@
             // ... 
             loginUser = false;
             
-            document.getElementById("accordionFlushExample").innerHTML = `<p>Please Login to View!</p>`
+            document.getElementById("accordionFlushExample").innerHTML = `<h1>Please Login to View!</h1>`
             document.getElementById('logoutBtn').style.display = "none"
         }
     });
