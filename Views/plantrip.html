@@ -142,7 +142,7 @@
                     </div>
                     <div class="bg-dark text-light">
                         <b style="font-size : 20px"> {{'Day ' + (index + 1)}}</b>
-                        <button class="btn btn-danger float-end" v-on:click="del(index)">Delete</button>
+                        <button class="btn btn-danger float-end py-0 my-1" v-on:click="del(index)">Delete</button>
                     </div>
                     <table class='table table-bordered table-striped text-center'>
                         <tr>
@@ -171,15 +171,31 @@
                                     <input type="text" class="form-control" v-model="item2[2]">
                                 </td>
                                 <td>
-                                    <button v-on:click="delTime(index, index2)">Delete</button>
+                                    <button type="button" class="btn btn-danger"
+                                        v-on:click="delTime(index, index2)">Delete</button>
                                 </td>
                             </tr>
                         </template>
                         <tr>
-                            <td>
-                                <input type="time" name="" :id="index + 's'">
-                                <input type="time" name="" :id="index + 'e'">
-                                <button v-on:click="addTime(index)">Add Time</button>
+                            <td colspan="4">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-3">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon7">Start Time</span>
+                                            <input type="time" :id="index + 's'" class="form-control"
+                                                aria-describedby="basic-addon7">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon8">End Time</span>
+                                            <input type="time" :id="index + 'e'" class="form-control"
+                                                aria-describedby="basic-addon8">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2"><button type="button" class="btn btn-primary"
+                                            v-on:click="addTime(index)">Add Time</button></div>
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -204,10 +220,14 @@
                 </div>
             </div>
         </div>
+        <input hidden type="text" id="update" v-on:change="updateTrip()">
     </div>
+
 
     <script>
         trip = []
+        display_update_trip = []
+        key_update = ''
         const app = Vue.createApp({
             data() {
                 return {
@@ -233,9 +253,12 @@
             //         return false;
             //     }  
             // }, // computed
-            // created() {
-            //     this.weather()
-            // },
+            created() {
+                setTimeout(() => {
+                    this.updateTrip() // method to call when user is done typing
+                }, 3000)
+
+            },
             // mounted() { 
             // },
             methods: {
@@ -580,6 +603,16 @@
                         .catch(error => {
                             console.log(error.message);
                         });
+                },
+                updateTrip() {
+                    if (key_update != '') {
+                        this.trip = display_update_trip
+                        trip = this.trip
+                        console.log('hi')
+                        console.log(this.trip)
+                        document.getElementById('insertBtn').hidden = false
+
+                    }
                 }
             }, // methods
         });
@@ -592,7 +625,7 @@
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
-    import { getDatabase, ref, onValue, set, update, get, push, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+    import { getDatabase, ref, onValue, set, update, get, push, child, remove } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -617,9 +650,33 @@
     var destination = document.getElementById("destination")
     var description = document.getElementById("description")
     var addBtn = document.getElementById("insertBtn")
+    var current_url_page = window.location.href
+    var update_key = ''
+    if (current_url_page.includes("key=")) {
+        var current_url_page_arr = current_url_page.split('key=')
+        update_key = current_url_page_arr[1]
+        key_update = update_key
+    }
 
 
     function insertData() {
+        if (update_key != '') {
+            remove(ref(db, "AllItineraries/" + loginUser.uid + "/" + update_key))
+                .then(() => {
+
+                })
+                .catch((error) => {
+
+                })
+
+
+            remove(ref(db, "ItinerariesCatalog/" + update_key))
+                .then(() => {
+                })
+                .catch((error) => {
+                    alert("Unsuccessful, Error: " + error)
+                })
+        }
         //unique id (or also can use Date.now())
         var itinerary_id = push(child(ref(db), "Itineraries")).key
 
@@ -689,6 +746,8 @@
             .catch((error) => {
                 alert("unsuccessful, " + error)
             });
+        update_key = ''
+        display_update_trip = []
     }
 
     //Assign event listener
@@ -714,8 +773,51 @@
             document.getElementById('registerPage').style.display = "none"
             document.getElementById('loginUser').innerText = `Current User: ${user.email}`;
 
+            if (update_key != '') {
+                var update_trip = []
+                onValue(ref(db, 'AllItineraries/' + uid), (snapshot) => {
 
+                    //console.log(snapshot.val())
+                    var counter = 1
 
+                    for (let itinerary_key in snapshot.val()) {
+                        if (itinerary_key == update_key) {
+                            var itinerary_obj = snapshot.val()[itinerary_key]
+                            var itinerary = itinerary_obj.itinerary
+                            console.log(itinerary_key)
+                            budget.value = itinerary_obj.Budget
+                            description.value = itinerary_obj.Description
+                            destination.value = itinerary_obj.Destination
+                            name.value = itinerary_obj.ItineraryName
+                            console.log(itinerary_obj)
+                            console.log(itinerary)
+                            let update_arr_day = []
+                            for (let day in itinerary) {
+                                let day_activities = itinerary[day]
+                                let update_arr = []
+                                for (let activity in day_activities) {
+                                    //console.log(day_activities[activity])     //this logs every activity in the list of activities in the current day
+                                    let time = day_activities[activity].time
+                                    let act = day_activities[activity].act_name
+                                    let add = day_activities[activity].address
+                                    console.log([time, act, add])
+                                    update_arr.push([time, act, add])
+                                }
+                                update_arr_day.push(update_arr)
+                            }
+                            update_trip = update_arr_day
+                        }
+                    }
+
+                    display_update_trip = update_trip
+                    console.log('end')
+                    console.log(display_update_trip)
+
+                    //DELETE TRIP FUNCTION
+                    //console.log(i)
+
+                })
+            }
         } else {
             // User is signed out 
             // ... 
