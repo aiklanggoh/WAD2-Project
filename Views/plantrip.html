@@ -567,12 +567,12 @@
                                         economy_price += parseInt(item.price.total)
                                     }
                                     economy_average_price = economy_price / economy.length
-                                    this.economy_avg = economy_average_price.toFixed(2)
+                                    this.economy_avg = (economy_average_price * 1.42).toFixed(2)
                                     if (this.economy_avg == 0 || isNaN(this.economy_avg)) {
                                         this.economy_avg = 'No tickets available'
                                     }
                                     else {
-                                        this.economy_avg = 'EUR ' + this.economy_avg
+                                        this.economy_avg = 'SGD $' + this.economy_avg
                                     }
                                     // console.log(this.economy_avg)
                                 })
@@ -603,12 +603,12 @@
                                         business_price += parseInt(item.price.total)
                                     }
                                     business_average_price = business_price / business.length
-                                    this.business_avg = business_average_price.toFixed(2)
+                                    this.business_avg = (business_average_price * 1.42).toFixed(2)
                                     if (this.business_avg == 0 || isNaN(this.business_avg)) {
                                         this.business_avg = 'No tickets available'
                                     }
                                     else {
-                                        this.business_avg = 'EUR ' + this.business_avg
+                                        this.business_avg = 'SGD $' + this.business_avg
                                     }
                                     // console.log(this.business_avg)
                                 })
