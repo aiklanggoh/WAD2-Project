@@ -1,6 +1,6 @@
-#IS216 G2T10
+# IS216 G2T10
 
-#TriPPlanner 
+**TriPPlanner** 
 
 ## Description
 
