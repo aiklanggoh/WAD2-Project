@@ -291,49 +291,49 @@
                 rainForest() {
                     this.amazonItems = []
                     //use this for the real API data
-                    // const rainForestApi = 'https://api.rainforestapi.com/request'
-                    // if (this.temp < 18) {
-                    //     search_item = this.winter
-                    // }
-                    // else if (this.temp > 30) {
-                    //     search_item = this.summer
-                    // }
-                    // else {
-                    //     search_item = this.normal
-                    // }
-                    // for (item of search_item) {
-                    //     axios.get(rainForestApi, {
-                    //         params: {
-                    //             api_key: "5A61AC05F8EF4F149313844B9D00DFF1",
-                    //             search_term: item,
-                    //             amazon_domain: 'amazon.com',
-                    //             type: "search"
-                    //         }
-                    //     })
-                    //         .then(response => {
-                    //             console.log(response.data);
-                    //             returnResult = {}
-                    //             returnResult.image = response.data.search_results[0].image
-                    //             returnResult.price = response.data.search_results[0].price.value
-                    //             returnResult.title = response.data.search_results[0].title
-                    //             returnResult.link = response.data.search_results[0].link
-                    //             this.amazonItems.push(returnResult)
-                    //             console.log(this.amazonItems)
-                    //         })
-                    //         .catch(error => {
-                    //             console.log(error.message);
-                    //         });
-                    // }
+                    const rainForestApi = 'https://api.rainforestapi.com/request'
+                    if (this.temp < 18) {
+                        search_item = this.winter
+                    }
+                    else if (this.temp > 30) {
+                        search_item = this.summer
+                    }
+                    else {
+                        search_item = this.normal
+                    }
+                    for (item of search_item) {
+                        axios.get(rainForestApi, {
+                            params: {
+                                api_key: "5A61AC05F8EF4F149313844B9D00DFF1",
+                                search_term: item,
+                                amazon_domain: 'amazon.com',
+                                type: "search"
+                            }
+                        })
+                            .then(response => {
+                                console.log(response.data);
+                                returnResult = {}
+                                returnResult.image = response.data.search_results[0].image
+                                returnResult.price = response.data.search_results[0].price.value
+                                returnResult.title = response.data.search_results[0].title
+                                returnResult.link = response.data.search_results[0].link
+                                this.amazonItems.push(returnResult)
+                                console.log(this.amazonItems)
+                            })
+                            .catch(error => {
+                                console.log(error.message);
+                            });
+                    }
 
                     // use this if the api is not working
-                    for (let i = 0; i < 3; i++) {
-                        returnResult = {}
-                        returnResult.image = '../img/Image_not_available.png'
-                        returnResult.price = '13.50'
-                        returnResult.title = 'this api is not working bloody hell'
-                        returnResult.link = 'www.google.com'
-                        this.amazonItems.push(returnResult)
-                    }
+                    // for (let i = 0; i < 3; i++) {
+                    //     returnResult = {}
+                    //     returnResult.image = '../img/Image_not_available.png'
+                    //     returnResult.price = '13.50'
+                    //     returnResult.title = 'this api is not working bloody hell'
+                    //     returnResult.link = 'www.google.com'
+                    //     this.amazonItems.push(returnResult)
+                    // }
 
                 },
                 weather() {
