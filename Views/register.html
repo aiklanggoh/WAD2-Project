@@ -29,14 +29,14 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                <a class="navbar-brand mx-3 text-white text-bold" href="../index.html" >
                     <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="browse.html">Browse Itineraries</a>
@@ -115,11 +115,28 @@
         const db = getDatabase(app);
 
 
-
-
-
         const auth = getAuth();
         var loginUser = false; // Current Logged In User, false if not logged in.
+
+        // when authentication status changed 
+        onAuthStateChanged(auth, (user) => { 
+            if (user) { 
+                // User is signed in, see docs for a list of available properties 
+                // https://firebase.google.com/docs/reference/js/firebase.User
+    
+                const uid = user.uid; 
+                // ... 
+                loginUser = user; 
+
+    
+                
+            } else { 
+                // User is signed out 
+                // ... 
+                loginUser = false; 
+                document.getElementById('logoutBtn').style.display = "none"
+            } 
+        }); 
 
         
 

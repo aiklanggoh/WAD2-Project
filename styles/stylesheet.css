@@ -3,6 +3,12 @@
     background-color: #769ABE;
 }
 
+.bg-row { 
+    color: #ffffff; 
+    background-color: #E46F44 !important;
+    border-color: #FFFFFF; 
+} 
+
 /* Button Color */
 .btn-bg { 
     color: #ffffff; 
@@ -246,3 +252,6 @@ background-size: cover;
 .activityStyle{
     padding-bottom: 10px;
 }
+
+
+

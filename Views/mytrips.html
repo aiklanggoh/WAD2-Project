@@ -28,14 +28,14 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                <a class="navbar-brand mx-3 text-white text-bold" href="../index.html" >
                     <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="browse.html">Browse Itineraries</a>
@@ -82,7 +82,7 @@
     <div class="container-fluid">
         <!-- <h1 class="text-center my-5">My Planned Trips</h1> -->
 
-        <div class="accordion accordion-flush px-5" id="accordionFlushExample">
+        <div class="accordion accordion-flush px-5 pt-5" id="accordionFlushExample">
 
             <!-- ACCORDION ITEMS FOR EACH TRIP -->
 
@@ -147,7 +147,7 @@
             //GET EACH ITINERARY UNDER CURRENT USER
             onValue(ref(db, 'AllItineraries/' + uid), (snapshot) => {
 
-                console.log(snapshot.val())
+                // console.log(snapshot.val())
                 var counter = 1
 
 
@@ -172,7 +172,7 @@
                         <div id="flush${counter}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body" id="trip${counter}">
                                 <button class="btn btn-danger my-3" id="deleteTrip${counter}" value="${itinerary_key}">Delete</button>
-                                <a class="btn btn-primary" href="plantrip.html?key=${itinerary_key}" role="button">Update</a>
+                                <a class="btn btn-blue" href="plantrip.html?key=${itinerary_key}" role="button">Update</a>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                         accord.appendChild(tripContainer)
 
                         let dayRow = document.createElement("div")
-                        dayRow.setAttribute("class", "row bg-info dayStyle")
+                        dayRow.setAttribute("class", "row bg-row dayStyle")
                         tripContainer.appendChild(dayRow)
 
                         let dayCol = document.createElement("div")
@@ -322,7 +322,7 @@
         signOut(auth).then(() => {
             // Sign-out successful.
             loginUser = false;
-            location.href = "index.html"
+            location.href = "../index.html"
 
         }).catch((error) => {
             // An error happened. 

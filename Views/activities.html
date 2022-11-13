@@ -28,14 +28,14 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                <a class="navbar-brand mx-3 text-white text-bold" href="../index.html" >
                     <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="browse.html">Browse Itineraries</a>
@@ -87,16 +87,15 @@
                     <div class="card mt-5">
                         <!-- <h3 class="text-center">Filter</h3> -->
                         <div class="card-body">
-                            <div class="slidecontainer">
+                            <div class="input-group mt-3 mb-3">
+                                <input type="text" class="form-control" placeholder="Search for Places of Interest!" v-on:keyup.enter="init()" name="" id="" v-model="country">
+                                <button class="btn btn-bg text-white" type="button" v-on:click="init()">Search!</button>
+                            </div>
+
+                            <div class="slidecontainer" id="filter">
                                 <h5>Budget</h5>
                                 <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
                                 <output>{{max_price}}</output>
-                            </div>
-            
-            
-                            <div class="input-group mt-3 mb-3">
-                                <input type="text" class="form-control" placeholder="Search for Places of Interest!" name="" id="" v-model="country">
-                                <button class="btn btn-bg text-white" type="button" v-on:click="init()">Search!</button>
                             </div>
                         </div>
                     </div>
@@ -113,15 +112,15 @@
             <div class="container-fluid">
                 <div class="row">
                     <template v-for="(item, index) in activities">
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='FREE!!!'">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='Free'">
                             <div class="card h-100">
                                 <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.onerror=null;this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
-                                    <a :href="item.link" class="btn btn-bg text-white stretched-link">See More</a>
+                                    <a :href="item.link" target="_blank" class="btn btn-bg text-white stretched-link">See More</a>
                                 </div>
                                 <div class="card-footer">
-                                    <h4 class="text-muted" v-if="item.price == 'FREE!!!'">{{ item.price}}</h4>
+                                    <h4 class="text-muted" v-if="item.price == 'Free'">{{ item.price}}</h4>
                                     <h4 class="text-muted" v-else>{{'$' + item.price}}</h4>
                                 </div>
                             </div>
@@ -191,6 +190,9 @@
                     .catch(error => {
                         console.log(error.message);
                     })
+
+                document.getElementById('filter').style.display = "inline"
+                
             },
             flightTour() {
                 amadeusTour = 'https://test.api.amadeus.com/v1/shopping/activities'
@@ -312,6 +314,7 @@
             document.getElementById('loginPage').style.display = "none"
             document.getElementById('registerPage').style.display = "none"
             document.getElementById('loginUser').innerText = `Current User: ${user.email}`; 
+            document.getElementById('filter').style.display = "none"
 
 
             
@@ -320,6 +323,7 @@
             // ... 
             loginUser = false; 
             document.getElementById('logoutBtn').style.display = "none"
+            document.getElementById('filter').style.display = "none"
         } 
     }); 
 

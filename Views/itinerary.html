@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/stylesheet.css">
     <title>TriPPlaner | Itinerary</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.png">
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -27,14 +28,14 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                <a class="navbar-brand mx-3 text-white text-bold" href="../index.html" >
                     <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-white" href="browse.html">Browse Itineraries</a>
@@ -236,11 +237,11 @@
             var counter = 1
 
             var itineraryObj = snapshot.val()
-            console.log("name is: " + itineraryObj.ItineraryName)
-            console.log("budget is: " + itineraryObj.Budget)
-            console.log("duration is: " + itineraryObj.Days)
-            console.log("destination is: " + itineraryObj.Destination)
-            console.log("description is: " + itineraryObj.Description)
+            // console.log("name is: " + itineraryObj.ItineraryName)
+            // console.log("budget is: " + itineraryObj.Budget)
+            // console.log("duration is: " + itineraryObj.Days)
+            // console.log("destination is: " + itineraryObj.Destination)
+            // console.log("description is: " + itineraryObj.Description)
             
 
             document.getElementById("tripname").innerText += " " + itineraryObj.ItineraryName
@@ -249,13 +250,13 @@
             document.getElementById("budget").innerText += " " + itineraryObj.Budget
             document.getElementById("description").innerText += " " + itineraryObj.Description
 
-            console.log(itineraryObj.itinerary)
+            // console.log(itineraryObj.itinerary)
 
             var trip = document.getElementById("trip")
 
             for (let day in itineraryObj.itinerary) {
                 var day_acts = itineraryObj.itinerary[day]
-                console.log(day_acts)
+                // console.log(day_acts)
 
                 //NEW DAY TABLE
                 let tripContainer = document.createElement("div")
@@ -263,7 +264,7 @@
                 trip.appendChild(tripContainer)
 
                 let dayRow = document.createElement("div")
-                dayRow.setAttribute("class", "row bg-info dayStyle")
+                dayRow.setAttribute("class", "row bg-row dayStyle")
                 tripContainer.appendChild(dayRow)
 
                 let dayCol = document.createElement("div")
