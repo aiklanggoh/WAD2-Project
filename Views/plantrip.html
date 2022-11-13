@@ -304,7 +304,7 @@
                     for (item of search_item) {
                         axios.get(rainForestApi, {
                             params: {
-                                api_key: "FBD2EBAD82E1463CB92C4C23DCB542F7",
+                                api_key: "8F0E7DB257AD43B0A21EC39382C512CC",
                                 search_term: item,
                                 amazon_domain: 'amazon.com',
                                 type: "search"
@@ -325,15 +325,6 @@
                             });
                     }
 
-                    // use this if the api is not working
-                    // for (let i = 0; i < 3; i++) {
-                    //     returnResult = {}
-                    //     returnResult.image = '../img/Image_not_available.png'
-                    //     returnResult.price = '13.50'
-                    //     returnResult.title = 'this api is not working bloody hell'
-                    //     returnResult.link = 'www.google.com'
-                    //     this.amazonItems.push(returnResult)
-                    // }
 
                 },
                 weather() {
@@ -542,8 +533,8 @@
                     flightOffer = 'https://test.api.amadeus.com/v2/shopping/flight-offers'
                     axios.post(urlAuth, {
                         grant_type: 'client_credentials',
-                        client_id: 'anWsVbPQ2XRKpVaqhPpAAo6kD3gWg9W4',
-                        client_secret: 'mVpJAulivwbKwyjE'
+                        client_id: 'OJjdkhKNd9voqnjjj40AGYlGy8fcAh3w',
+                        client_secret: 'sgs0QeNk0iBLl2Ar'
                     },
                         {
                             headers: { "Content-Type": "application/x-www-form-urlencoded" }
