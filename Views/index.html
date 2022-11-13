@@ -132,19 +132,12 @@
 
         <div id="app">
             <div class="row pb-5">
-                <div class="col">
-                    <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="true">
-                        
-                        <div class="carousel-inner">
-    
-                            <!--Each slide 3 cards-->
-                            <div class="carousel-item active">
-                                <div class="cards-wrapper">
-                                    <itinerary-card></itinerary-card>    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <div class="col-lg-1 col-md-2"></div>
+                <div class="col-lg-10 col-md-8">
+                    <div class="row">
+                        <itinerary-card></itinerary-card>    
+                    </div>
+       <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Previous</span>
                         </button>
@@ -153,6 +146,7 @@
                           <span class="visually-hidden">Next</span>
                         </button> -->
                     </div>
+                    <div class="col-lg-1 col-md-2"></div>
     
                 </div>
             </div>
@@ -181,8 +175,6 @@
     
         // connect to the realtime database
         const db = getDatabase(app);
-    
-    
     
     
         /* AUTHENTICATION CODE: START */ 
@@ -258,10 +250,10 @@
 
             }
 
-            console.log(itinerary_key_list)
+            // console.log(itinerary_key_list)
             // console.log(itinerary_key_list[0])
-            console.log(itinerary_list)
-            console.log(itineraryCatalog)
+            // console.log(itinerary_list)
+            // console.log(itineraryCatalog)
 
 
             const app = Vue.createApp({
@@ -294,7 +286,7 @@
                 }, // data
 
                 template: `
-                            <div v-for="(item, key) in catalog" class="col-lg-2 col-md-4 col-sm-6">
+                            <div v-for="(item, key) in catalog" class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card h-90">
                                     <div class="card-body">
                                         <h5 class="card-title">{{item.ItineraryName}}</h5>
