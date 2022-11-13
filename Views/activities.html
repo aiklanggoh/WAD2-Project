@@ -217,7 +217,7 @@
                             user.pic = data.pictures[0]
                             user.link = data.bookingLink
                             if (data.price.amount == '0.0') {
-                                user.price = 'FREE!!!'
+                                user.price = 'Free'
                             }
                             else {
                                 user.price = parseInt(data.price.amount)
