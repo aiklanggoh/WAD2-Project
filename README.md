@@ -4,7 +4,7 @@
 
 ## Description
 
-TriPPlanner is a one-stop platform for you to browse itineraries for inspiration, browse activities, get recommended items to buy based by dates and seasons, and to plan and create itinerary for your next trip!
+TriPPlanner is a one-stop platform for you to browse itineraries for inspiration, browse activities, get recommended items to buy based on dates and seasons, and to plan and create an itinerary for your next trip!
 
 ### Dependencies
 
