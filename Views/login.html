@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/stylesheet.css">
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.png">
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -22,41 +23,43 @@
 
 <body>
     <!--Nav Bar-->
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-bg text-white">
         <div class="container-fluid">
             <div class="d-flex">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3" href="index">TriPPlaner</a>
+                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                    <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="browse.html">Browse Itineraries</a>
+                        <a class="nav-link text-white" href="browse.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="plantrip.html">Plan Trip</a>
+                        <a class="nav-link text-white" href="plantrip.html">Plan Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="activities.html">Activities</a>
+                        <a class="nav-link text-white" href="activities.html">Activities</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="mytrips.html">My Trips</a>
+                        <a class="nav-link text-white" href="mytrips.html">My Trips</a>
                     </li>
                 </ul>
-            </div>
 
+                
+                
+            </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2"
-                    aria-controls="#picker-editor">Login</a>
-                <a href="register.html" role="button" class="btn btn-primary mb-1 me-lg-3"
-                    aria-controls="#picker-editor">Register</a>
+                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <span class="px-3" id="loginUser"></span>
+                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>

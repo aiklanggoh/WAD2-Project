@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/stylesheet.css">
     <title>TriPPlaner | Activities</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.png">
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -21,70 +22,90 @@
 <body>
 
     <!--Nav Bar-->
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-bg text-white">
         <div class="container-fluid">
             <div class="d-flex">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3" href="index">TriPPlaner</a>
+                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                    <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="browse.html">Browse Itineraries</a>
+                        <a class="nav-link text-white" href="browse.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="plantrip.html">Plan Trip</a>
+                        <a class="nav-link text-white" href="plantrip.html">Plan Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="activities.html">Activities</a>
+                        <a class="nav-link active text-white" href="activities.html">Activities</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="mytrips.html">My Trips</a>
+                        <a class="nav-link text-white" href="mytrips.html">My Trips</a>
                     </li>
                 </ul>
 
-
-
+                
+                
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-primary px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
-                <a href="register.html" role ="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
                 <span class="px-3" id="loginUser"></span>
-                <a role="button" class="btn btn-primary mb-1 me-lg-3" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
+                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
 
+    <!-- Header Container -->
+    <div class="container-flex bg-image" style="background-image: url(../img/mountain.jpg); height: 50vh;"> 
+        <section class="container pt-5">
+            <section class="mb-10 text-center text-md-start"> 
+                <div class="row align-items-center"> 
+                    <div class="col-md-6 mb-4 mb-md-0"> 
+                        <h2 class="mb-4 display-3 fw-bold ls-tight"> 
+                        <span class="text-orange">Browse</span> <br> <span class="text-white">Places of Interest</span> 
+                        </h2>
+                    </div> 
+                </div> 
+            </section>
+        </section>
+    </div>
 
 
     <div id="app">
-        <div class="d-flex mt-5" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border bg-white" id="sidebar-wrapper">
-                <h3 class="text-center">Filter</h3>
-
-                <h5 class="mx-3 mt-3 w-100">Budget</h5>
-
-                <div class="slidecontainer">
-                    <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
-                    <output>{{max_price}}</output>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-1"></div>
+                <div class="col-lg-8 col-md-4 col-sm-10">
+                    <div class="card mt-5">
+                        <!-- <h3 class="text-center">Filter</h3> -->
+                        <div class="card-body">
+                            <div class="slidecontainer">
+                                <h5>Budget</h5>
+                                <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
+                                <output>{{max_price}}</output>
+                            </div>
+            
+            
+                            <div class="input-group mt-3 mb-3">
+                                <input type="text" class="form-control" placeholder="Search for Places of Interest!" name="" id="" v-model="country">
+                                <button class="btn btn-bg text-white" type="button" v-on:click="init()">Search!</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
-                <h5 class="mx-3 mt-5 w-100">Which city whould you like to visit?</h5>
-                <div class="mx-3 w-150 mb-3 me-3">
-                    <input type="text" name="" id="" v-model="country">
-                    <button v-on:click="init()">Search!</button>
-                </div>
-
+                <div class="col-lg-2 col-md-4 col-sm-1"></div>
             </div>
+            
+        </div>
+        
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
             </div>
@@ -97,7 +118,7 @@
                                 <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.onerror=null;this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
-                                    <a :href="item.link" class="btn btn-primary stretched-link">See More</a>
+                                    <a :href="item.link" class="btn btn-bg text-white stretched-link">See More</a>
                                 </div>
                                 <div class="card-footer">
                                     <h4 class="text-muted" v-if="item.price == 'FREE!!!'">{{ item.price}}</h4>
