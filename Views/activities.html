@@ -169,6 +169,10 @@
         // },
         methods: {
             init() {
+                if (country === '') {
+                    alert('Empty search, please enter a city')
+                }
+                else {
                 this.max_price = 0,
                     this.min_price = 999999,
                     console.log(this.country)
@@ -192,6 +196,7 @@
                     })
 
                 document.getElementById('filter').style.display = "inline"
+                }
                 
             },
             flightTour() {
