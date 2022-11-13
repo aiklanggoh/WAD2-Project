@@ -27,19 +27,17 @@
     <nav class="navbar navbar-expand-lg navbar-bg text-white">
         <div class="container-fluid">
             <div class="d-flex">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3 text-white text-bold" href="index.html">
+                <a class="navbar-brand mx-3 text-white text-bold" href="../index.html" >
                     <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills pill-color">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-white" href="browse.html">Browse Itineraries</a>
@@ -55,36 +53,33 @@
                     </li>
                 </ul>
 
-
-
+                
+                
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor"
-                    id="loginPage">Login</a>
-                <a href="register.html" role="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor"
-                    id="registerPage">Register</a>
+                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
+                <a href="register.html" role ="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
                 <span class="px-3" id="loginUser"></span>
-                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor"
-                    id="logoutBtn">Logout</a>
+                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
 
-    <!-- Header Container -->
-    <div class="container-flex bg-image" style="background-image: url(../img/amalfi.jpeg); height: 50vh;">
+     <!-- Header Container -->
+     <div class="container-flex bg-image" style="background-image: url(../img/amalfi.jpeg); height: 50vh;"> 
         <section class="container pt-5">
-            <section class="mb-10 text-center text-md-start">
-                <div class="row align-items-center">
-                    <div class="col-md-6 mb-4 mb-md-0">
-                        <h2 class="mb-4 display-3 fw-bold ls-tight">
-                            <span class="text-orange">Browse</span> <br> <span class="text-white">Itineraries</span>
+            <section class="mb-10 text-center text-md-start"> 
+                <div class="row align-items-center"> 
+                    <div class="col-md-6 mb-4 mb-md-0"> 
+                        <h2 class="mb-4 display-3 fw-bold ls-tight"> 
+                        <span class="text-orange">Browse</span> <br> <span class="text-white">Itineraries</span> 
                         </h2>
-                    </div>
-                </div>
+                    </div> 
+                </div> 
             </section>
         </section>
     </div>
-
+    
     <div id='app'>
         <div class="container-fluid">
             <div class="row">
@@ -93,14 +88,13 @@
                     <div class="col-lg-2 col-md-4 col-sm-6" id="sidebar-wrapper">
                         <!-- <h3 class="text-center">Filter</h3> -->
                         <h5 class="mx-3 mb-2 w-100">Budget</h5>
-
+        
                         <div class="mx-3 mb-3 slidecontainer">
-                            <input type="range" :min="min_price" :max="max_price" v-model="set_price"
-                                oninput="this.nextElementSibling.value = this.value">
+                            <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
                             <output>{{max_price}}</output>
                         </div>
                     </div>
-
+        
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <h5 class="mx-3 w-100">Destination</h5>
                         <div class="mx-3 mb-3">
@@ -108,28 +102,28 @@
                                 <option v-for="(item, index) in country_arr">{{item}}</option>
                             </select>
                         </div>
+        
+                    </div> 
+                </div>
+                         
+            </div>
+        </div>
+        
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+            </div>
+                <!-- Page content-->
 
                 <div class="container-fluid">
                     <div class="row">
                         <itinerary-card :selected_country="selected_country" :price="set_price"></itinerary-card>
                     </div>
                 </div>
-
-            </div>
+            
         </div>
-
-        <!-- Page content wrapper-->
-        <div id="page-content-wrapper">
-        </div>
-        <!-- Page content-->
-
-        <div class="container-fluid">
-            <div class="row">
-                <itinerary-card v-on:showKey='' :selected_country="selected_country" :price="set_price"></itinerary-card>
-            </div>
-        </div>
+        
+        
     </div>
-
 
 
     <script type="module">
@@ -271,6 +265,13 @@
                         set_price: max,
                     };
                 }, // methods
+                methods: {
+                    storeKey() {
+                        var currentKey = this.value
+                        alert(currentKey)
+                    }
+                }
+
             });
 
 
@@ -298,10 +299,8 @@
                                 <form action="itinerary.html" method="get">
                                     <input type="hidden" name="key" v-bind:value='key'>
                                     <button class="btn btn-bg text-white" input type="submit" value="See More"> See More </button>
-
                                 </form>
                             </div>
-
                             <div class="card-footer">
                                 <h4 class="text-muted">$ {{item.Budget}}</h4>
                             </div>
