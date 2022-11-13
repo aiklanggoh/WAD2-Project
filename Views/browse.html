@@ -225,10 +225,10 @@
 
             }
 
-            console.log(itinerary_key_list)
+            // console.log(itinerary_key_list)
             // console.log(itinerary_key_list[0])
-            console.log(itinerary_list)
-            console.log(itineraryCatalog)
+            // console.log(itinerary_list)
+            // console.log(itineraryCatalog)
 
             // get the countries, min price, max price
             var country_list = []
@@ -298,9 +298,11 @@
                                 <p class="card-text">{{item.Description}}</p>
                                 <form action="itinerary.html" method="get">
                                     <input type="hidden" name="key" v-bind:value='key'>
-                                    <button class="btn btn-bg text-white"input type="submit" value="See More">See More</button>
+                                    <button class="btn btn-bg text-white"input type="submit" value="See More"> See More </button>
+
                                 </form>
                             </div>
+
                             <div class="card-footer">
                                 <h4 class="text-muted">$ {{item.Budget}}</h4>
                             </div>
