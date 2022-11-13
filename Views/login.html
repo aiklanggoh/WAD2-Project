@@ -124,6 +124,26 @@
         const auth = getAuth();
         var loginUser = false; // Current Logged In User, false if not logged in.
 
+        // when authentication status changed 
+        onAuthStateChanged(auth, (user) => { 
+            if (user) { 
+                // User is signed in, see docs for a list of available properties 
+                // https://firebase.google.com/docs/reference/js/firebase.User
+    
+                const uid = user.uid; 
+                // ... 
+                loginUser = user; 
+
+    
+                
+            } else { 
+                // User is signed out 
+                // ... 
+                loginUser = false; 
+                document.getElementById('logoutBtn').style.display = "none"
+            } 
+        }); 
+
         // google login 
         document.getElementById('btnLogin').addEventListener('click', function () {
             signInWithPopup(auth, provider)
