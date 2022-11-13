@@ -4,6 +4,8 @@
 
 ## Description
 
+TriPPlanner is a one-stop platform for you to browse itineraries for inspiration, browse activities, get recommended items to buy based by dates and seasons, and to plan and create itinerary for your next trip!
+
 ### Dependencies
 
 - **HTML 5**
@@ -11,6 +13,10 @@
 - **Bootstrap**
 - **VueJS** framework
 - **Google Firebase** 
+
+### Instructions to use this program
+
+- Open up index.html to execute the program
 
 ### Executing program
 
