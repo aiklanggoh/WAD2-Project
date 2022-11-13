@@ -147,16 +147,8 @@
                     <div class="row">
                         <itinerary-card></itinerary-card>    
                     </div>
-       <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
-                        </button> -->
-                    </div>
-                    <div class="col-lg-1 col-md-2"></div>
+                </div>
+                <div class="col-lg-1 col-md-2"></div>
     
                 </div>
             </div>
@@ -300,7 +292,7 @@
 
                 template: `
                         <template v-for="(item, key) in catalog">
-                            <div v-if='random_arr.indexOf(key) != -1' class="col-lg-2 col-md-4 col-sm-6">
+                            <div v-if='random_arr.indexOf(key) != -1' class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="card h-90">
                                     <div class="card-body">
                                         <h5 class="card-title">{{item.ItineraryName}}</h5>
