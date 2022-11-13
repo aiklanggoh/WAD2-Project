@@ -494,11 +494,11 @@
                                     console.log(to_lat)
                                     console.log(to_lng)
                                     //from iata
-                                    axios.get('http://www.iatageo.com/getCode/' + from_lat + '/' + from_lng)
+                                    axios.get('https://www.iatageo.com/getCode/' + from_lat + '/' + from_lng)
                                         .then(response => {
                                             this.from_iata = response.data.IATA
                                             console.log(this.from_iata)
-                                            axios.get('http://www.iatageo.com/getCode/' + to_lat + '/' + to_lng)
+                                            axios.get('https://www.iatageo.com/getCode/' + to_lat + '/' + to_lng)
                                                 .then(response => {
                                                     this.to_iata = response.data.IATA
                                                     console.log(this.to_iata)
