@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/stylesheet.css">
+    <link rel="stylesheet" href="styles/stylesheet.css">
     <title>TriPPlaner | Home</title>
-    <link rel="icon" type="image/x-icon" href="../img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -34,7 +34,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand mx-3 text-white text-bold" href="index.html">
-                    <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
+                    <img src="img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -43,16 +43,16 @@
                         <a class="nav-link active text-white" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="browse.html">Browse Itineraries</a>
+                        <a class="nav-link text-white" href="Views/browse.html">Browse Itineraries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="plantrip.html">Plan Trip</a>
+                        <a class="nav-link text-white" href="Views/plantrip.html">Plan Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="activities.html">Activities</a>
+                        <a class="nav-link text-white" href="Views/activities.html">Activities</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="mytrips.html">My Trips</a>
+                        <a class="nav-link text-white" href="Views/mytrips.html">My Trips</a>
                     </li>
                 </ul>
 
@@ -104,22 +104,22 @@
             <div class="col-lg-10">
                 <div class="row">
                     <div class="col-lg-3 text-center">
-                        <img src="../img/plantrip.png" alt="" width="20%" height="auto">
+                        <img src="img/plantrip.png" alt="" width="20%" height="auto">
                         <h4 class="mt-5"> Plan Your Trip</h4>
                         <p class="mt-3"> Plan and manage your itinerary </p>
                     </div>
                     <div class="col-lg-3 text-center">
-                        <img src="../img/travel_itinerary.png" alt="" width="20%" height="auto">
+                        <img src="img/travel_itinerary.png" alt="" width="20%" height="auto">
                         <h4 class="mt-5"> Browse Itineraries</h4>
                         <p class="mt-3"> Find out what others has plan for their trip </p>
                     </div>
                     <div class="col-lg-3 text-center">
-                        <img src="../img/search.png" alt="" width="20%" height="auto">
+                        <img src="img/search.png" alt="" width="20%" height="auto">
                         <h4 class="mt-5"> Find Places of Interest</h4>
                         <p class="mt-3"> Search for your destination's places of interest </p>
                     </div>
                     <div class="col-lg-3 text-center">
-                        <img src="../img/list.png" alt="" width="20%" height="auto">
+                        <img src="img/list.png" alt="" width="20%" height="auto">
                         <h4 class="mt-5"> View Your Itinerary</h4>
                         <p class="mt-3"> Have an overview of your trip </p>
                     </div>
@@ -297,7 +297,7 @@
                                         <h5 class="card-title">{{item.ItineraryName}}</h5>
                                         <p class="card-text">{{item.Description}}</p>
                                         <br>
-                                        <form action="itinerary.html" method="get">
+                                        <form action="Views/itinerary.html" method="get">
                                             <input type="hidden" name="key" v-bind:value='key'>
                                             <button class="btn btn-bg text-white" input type="submit" value="See More">See More</button>
                                         </form> 
