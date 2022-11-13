@@ -1,3 +1,53 @@
+/* Nav Bar */
+.navbar-bg {
+    background-color: #769ABE;
+}
+
+.bg-row { 
+    color: #ffffff; 
+    background-color: #E46F44 !important;
+    border-color: #FFFFFF; 
+} 
+
+/* Button Color */
+.btn-bg { 
+    color: #ffffff; 
+    background-color: #E46F44 !important;
+    border-color: #FFFFFF; 
+} 
+
+/* Button Color */
+.btn-blue { 
+    color: #ffffff; 
+    background-color: #769ABE !important;
+    border-color: #FFFFFF; 
+} 
+
+/* Scrolling Effect */
+.parallax {
+/* The image used */
+background-image: url('../img/headerbg.jpg');
+
+/* Full height */
+height: 80vh; 
+
+/* Create the parallax scrolling effect */
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+/* Text Color */
+.text-orange {
+    color: #E8AA9B !important;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #DCD5DC !important;
+    color: black !important;
+}
+
 /* Sidebar */
 .sidebar {
     position: fixed;
@@ -202,3 +252,6 @@
 .activityStyle{
     padding-bottom: 10px;
 }
+
+
+
