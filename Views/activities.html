@@ -87,16 +87,15 @@
                     <div class="card mt-5">
                         <!-- <h3 class="text-center">Filter</h3> -->
                         <div class="card-body">
-                            <div class="slidecontainer">
-                                <h5>Budget</h5>
-                                <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
-                                <output>{{max_price}}</output>
-                            </div>
-            
-            
                             <div class="input-group mt-3 mb-3">
                                 <input type="text" class="form-control" placeholder="Search for Places of Interest!" name="" id="" v-model="country">
                                 <button class="btn btn-bg text-white" type="button" v-on:click="init()">Search!</button>
+                            </div>
+
+                            <div class="slidecontainer" id="filter">
+                                <h5>Budget</h5>
+                                <input type="range" :min="min_price" :max="max_price" v-model="set_price" oninput="this.nextElementSibling.value = this.value">
+                                <output>{{max_price}}</output>
                             </div>
                         </div>
                     </div>
@@ -118,7 +117,7 @@
                                 <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.onerror=null;this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
                                     <h5 class="card-title">{{item.name}}</h5>
-                                    <a :href="item.link" class="btn btn-bg text-white stretched-link">See More</a>
+                                    <a :href="item.link" target="_blank" class="btn btn-bg text-white stretched-link">See More</a>
                                 </div>
                                 <div class="card-footer">
                                     <h4 class="text-muted" v-if="item.price == 'FREE!!!'">{{ item.price}}</h4>
@@ -191,6 +190,9 @@
                     .catch(error => {
                         console.log(error.message);
                     })
+
+                document.getElementById('filter').style.display = "inline"
+                
             },
             flightTour() {
                 amadeusTour = 'https://test.api.amadeus.com/v1/shopping/activities'
@@ -312,6 +314,7 @@
             document.getElementById('loginPage').style.display = "none"
             document.getElementById('registerPage').style.display = "none"
             document.getElementById('loginUser').innerText = `Current User: ${user.email}`; 
+            document.getElementById('filter').style.display = "none"
 
 
             
