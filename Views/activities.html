@@ -89,7 +89,7 @@
                         <div class="card-body">
                             <div class="input-group mt-3 mb-3">
                                 <input type="text" class="form-control" placeholder="Search for Places of Interest!" name="" id="" v-model="country">
-                                <button class="btn btn-bg text-white" type="button" v-on:click="init()" v-on:keyup="init()">Search!</button>
+                                <button class="btn btn-bg text-white" type="button" v-on:click="init()" @keyup.enter="init()">Search!</button>
                             </div>
 
                             <div class="slidecontainer" id="filter">
@@ -112,7 +112,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <template v-for="(item, index) in activities">
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='FREE!!!'">
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-5" v-if="item.price <= set_price || item.price =='Free'">
                             <div class="card h-100">
                                 <img :src="item.pic" class="card-img-top h-50" alt="not found" onerror="this.onerror=null;this.src='../img/Image_not_available.png'">
                                 <div class="card-body">
@@ -323,6 +323,7 @@
             // ... 
             loginUser = false; 
             document.getElementById('logoutBtn').style.display = "none"
+            document.getElementById('filter').style.display = "none"
         } 
     }); 
 

@@ -404,7 +404,7 @@
                             previous_end_time = previous_time_slot[0].split(' - ')[1]
                             previous_end_time_int = parseInt(previous_end_time.split(':').join(''))
                             if (previous_end_time_int > parseInt(start_time.split(":").join(''))) {
-                                alert('your start time is earlier than previous end time')
+                                alert('Your start time is earlier than previous end time')
                             }
                             else {
                                 this.trip[day].push([start_time + ' - ' + end_time, '', ''])
@@ -413,7 +413,7 @@
                         }
                     }
                     else {
-                        alert('your start time is later then the end time or the same as end time')
+                        alert('Your start time is later then the end time OR the same as end time')
                     }
 
                 },
@@ -771,7 +771,7 @@
                 location.href = "mytrips.html"
             })
             .catch((error) => {
-                alert("unsuccessful, " + error)
+                alert("Unsuccessful, " + error)
             });
         update_key = ''
         display_update_trip = []
@@ -851,7 +851,7 @@
             loginUser = false;
             document.getElementById('logoutBtn').style.display = "none"
             //location.href = "index.html"
-            document.getElementById('app').innerHTML = "<h2 class='text-center'>Please Login to Plan a Trip!</h2>"
+            document.getElementById('app').innerHTML = "<h2 class='text-center pt-5'>Please Login to Plan a Trip!</h2>"
         }
     });
 
