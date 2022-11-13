@@ -20,16 +20,19 @@
 </head>
 
 
+
 <body>
 
     <!--Nav Bar-->
     <nav class="navbar navbar-expand-lg navbar-bg text-white">
         <div class="container-fluid">
             <div class="d-flex">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand mx-3 text-white text-bold" href="index.html" >
+                <a class="navbar-brand mx-3 text-white text-bold" href="index.html">
                     <img src="../img/logo.png" width="80" height="80" alt="">TriPPlanner
                 </a>
             </div>
@@ -52,28 +55,31 @@
                     </li>
                 </ul>
 
-                
-                
+
+
             </div>
             <div class="d-flex align-items-center">
-                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor" id="loginPage">Login</a>
-                <a href="register.html" role ="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor" id="registerPage">Register</a>
+                <a href="login.html" role="button" class="btn btn-success px-3 mb-1 me-2" aria-controls="#picker-editor"
+                    id="loginPage">Login</a>
+                <a href="register.html" role="button" class="btn btn-light mb-1 me-lg-3" aria-controls="#picker-editor"
+                    id="registerPage">Register</a>
                 <span class="px-3" id="loginUser"></span>
-                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor" id="logoutBtn">Logout</a>
+                <a role="button" class="btn btn-bg mb-1 me-lg-3 text-white" aria-controls="#picker-editor"
+                    id="logoutBtn">Logout</a>
             </div>
         </div>
     </nav>
 
-    <div class="container-flex bg-image" style="background-image: url(../img/grand_canal.jpeg); height: 50vh;"> 
+    <div class="container-flex bg-image" style="background-image: url(../img/grand_canal.jpeg); height: 50vh;">
         <section class="container pt-5">
-            <section class="mb-10 text-center text-md-start"> 
-                <div class="row align-items-center"> 
-                    <div class="col-md-6 mb-4 mb-md-0"> 
-                        <h2 class="mb-4 display-3 fw-bold ls-tight"> 
-                        <span class="text-orange">Plan</span> <br> <span class="text-white">Your Trip</span> 
+            <section class="mb-10 text-center text-md-start">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <h2 class="mb-4 display-3 fw-bold ls-tight">
+                            <span class="text-orange">Plan</span> <br> <span class="text-white">Your Trip</span>
                         </h2>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
             </section>
         </section>
     </div>
@@ -111,46 +117,47 @@
                     </div>
                 </div>
             </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon5">Flight Start Date</span>
-                    <input type="date" v-model="date" class="form-control" aria-describedby="basic-addon5">
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon5">Flight Start Date</span>
+                        <input type="date" v-model="date" class="form-control" aria-describedby="basic-addon5">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon6">Trip Description</span>
+                        <input type="text" id="description" class="form-control" aria-describedby="basic-addon6">
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon6">Trip Description</span>
-                    <input type="text" id="description" class="form-control" aria-describedby="basic-addon6">
+            <div class="row justify-content-center">
+                <div class="col-lg-2 text-center">
+                    <button type="button" class="btn btn-bg text-white" v-on:click="checkFlights()">Check
+                        Flights</button>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-2 text-center">
-                <button type="button" class="btn btn-bg text-white" v-on:click="checkFlights()">Check Flights</button>
+
+
+            <div class="row" v-if="to_iata != '' ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Flight date</th>
+                            <th scope="col">Average plane ticket price for Economy Class (round trip)</th>
+                            <th scope="col">Average plane ticket price for Business Class (round trip)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"> {{ date + ' to ' + end_date }} </th>
+                            <td> {{economy_avg }} </td>
+                            <td> {{business_avg }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-
-        <div class="row" v-if="to_iata != '' ">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Flight date</th>
-                        <th scope="col">Average plane ticket price for Economy Class (round trip)</th>
-                        <th scope="col">Average plane ticket price for Business Class (round trip)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"> {{ date + ' to ' + end_date }} </th>
-                        <td> {{economy_avg }} </td>
-                        <td> {{business_avg }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
         <div class="row">
             <div class="col-xl-10 col-lg-9 col-md-8">
                 <div class="row" v-for="(item, index) of trip">
