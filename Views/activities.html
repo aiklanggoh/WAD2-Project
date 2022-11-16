@@ -240,6 +240,10 @@
                                 this.min_price = data.price.amount
                             }
                             console.log(typeof(user.price))
+
+                            if (this.activities.length == 0) {
+                                alert('No results found')
+                            }
                             
                         }
                         this.set_price = this.max_price
@@ -248,9 +252,7 @@
                     .catch(error => {
                         console.log(error.message);
                     });
-                    if (this.activities.length == 0) {
-                                alert('No results found')
-                            }
+                    
             },
             location() {
                 googleMapKey = 'AIzaSyDJvQ07_z4s7gXHdfECKoynPXsYPvVePAE'
