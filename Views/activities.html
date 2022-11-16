@@ -239,13 +239,12 @@
                             else if (data.price.amount < this.min_price) {
                                 this.min_price = data.price.amount
                             }
-                            console.log(typeof(user.price))
-
-                            if (this.activities.length == 0) {
-                                alert('No results found')
-                            }
+                            console.log(typeof(user.price)) 
                             
                         }
+                        if (this.activities.length == 0) {
+                                alert('No results found')
+                            }
                         this.set_price = this.max_price
                         console.log(this.activities)
                     })
